@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using CultivoApp.ViewModels;
 
 namespace CultivoApp.Views
@@ -8,8 +7,8 @@ namespace CultivoApp.Views
     {
         public HomeView()
         {
-            AvaloniaXamlLoader.Load(this);
-            DataContext = new HomeViewModel(); // garante ViewModel em runtime
+            InitializeComponent();
+            DataContext = new HomeViewModel();
         }
     }
 }

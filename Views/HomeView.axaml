@@ -1,23 +1,22 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="CultivoApp.Views.HomeView"
-             Background="White">
+             x:Class="CultivoApp.Views.HomeView">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="30" Spacing="20">
+        <StackPanel Margin="20" Spacing="20" HorizontalAlignment="Center">
 
             <!-- Cabeçalho -->
-            <TextBlock Text="🍄 Selecione o tipo de cogumelo"
-                       FontSize="20"
+            <TextBlock Text="🏠 Monitoramento - Estufa Inteligente"
+                       FontSize="22"
                        FontWeight="Bold"
                        Foreground="#2C3E50"
                        HorizontalAlignment="Center"/>
 
-            <!-- ComboBox: ItemsSource e SelectedItem com binding normal -->
-            <ComboBox Width="300"
-                      HorizontalAlignment="Center"
-                      ItemsSource="{Binding Mushrooms}"
-                      SelectedItem="{Binding SelectedMushroom, Mode=TwoWay}">
+            <!-- ComboBox -->
+            <ComboBox ItemsSource="{Binding Mushrooms}"
+                      SelectedItem="{Binding SelectedMushroom}"
+                      Width="250"
+                      HorizontalAlignment="Center">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />
@@ -25,23 +24,26 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <!-- Card com imagem e parâmetros -->
+            <!-- Card de informações -->
             <Border Background="#FAFAFA"
-                    CornerRadius="12"
+                    CornerRadius="10"
                     Padding="20"
-                    Margin="0,20,0,0"
+                    Width="600"
                     BorderBrush="#DDD"
                     BorderThickness="1">
-                <StackPanel HorizontalAlignment="Center" Spacing="10">
-                    <Border Width="220" Height="150" CornerRadius="10" ClipToBounds="True">
-                        <Image Source="{Binding SelectedMushroom.ImagePath}" Stretch="UniformToFill"/>
-                    </Border>
+                <StackPanel Spacing="10" HorizontalAlignment="Center">
 
                     <TextBlock Text="{Binding SelectedMushroom.Name}"
                                FontSize="20"
                                FontWeight="Bold"
-                               Foreground="#2C3E50"
                                HorizontalAlignment="Center"/>
+
+                    <Image Source="{Binding SelectedMushroom.ImagePath}"
+                           Height="180"
+                           Width="260"
+                           Stretch="UniformToFill"
+                           HorizontalAlignment="Center"
+                           Margin="0,10"/>
 
                     <TextBlock Text="{Binding SelectedMushroom.Temperature}"
                                FontSize="14"
@@ -52,9 +54,34 @@
                                FontSize="14"
                                Foreground="#444"
                                HorizontalAlignment="Center"/>
+
+                    <Separator Margin="0,10"/>
+
+                    <!-- Simulação de leituras atuais -->
+                    <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center">
+                        <StackPanel>
+                            <TextBlock Text="🌡️ Temperatura Atual"
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="23.5 °C"
+                                       FontSize="16"
+                                       Foreground="#E67E22"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="💧 Umidade Atual"
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="82 %"
+                                       FontSize="16"
+                                       Foreground="#3498DB"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+
                 </StackPanel>
             </Border>
-
         </StackPanel>
     </ScrollViewer>
 </UserControl>

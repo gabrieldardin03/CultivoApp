@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 
 namespace CultivoApp.Views
 {
@@ -7,7 +6,7 @@ namespace CultivoApp.Views
     {
         public MainWindow()
         {
-            AvaloniaXamlLoader.Load(this);
+            InitializeComponent(); 
         }
     }
 }

@@ -84,6 +84,7 @@ C:\Users\gabriel dardin\Desktop\estufa2\CultivoApp\obj\Debug\net9.0\CultivoApp.G
 C:\Users\gabriel dardin\Desktop\estufa2\CultivoApp\obj\Debug\net9.0\CultivoApp.AssemblyInfoInputs.cache
 C:\Users\gabriel dardin\Desktop\estufa2\CultivoApp\obj\Debug\net9.0\CultivoApp.AssemblyInfo.cs
 C:\Users\gabriel dardin\Desktop\estufa2\CultivoApp\obj\Debug\net9.0\CultivoApp.csproj.CoreCompileInputs.cache
+C:\Users\gabriel dardin\Desktop\estufa2\CultivoApp\obj\Debug\net9.0\CultivoApp.sourcelink.json
 C:\Users\gabriel dardin\Desktop\estufa2\CultivoApp\obj\Debug\net9.0\CultivoApp.csproj.Up2Date
 C:\Users\gabriel dardin\Desktop\estufa2\CultivoApp\obj\Debug\net9.0\CultivoApp.dll
 C:\Users\gabriel dardin\Desktop\estufa2\CultivoApp\obj\Debug\net9.0\refint\CultivoApp.dll

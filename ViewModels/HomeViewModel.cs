@@ -59,7 +59,6 @@ namespace CultivoApp.ViewModels
 
     public class Mushroom
     {
-        // inicializa para evitar CS8618 warnings
         public string Name { get; set; } = string.Empty;
         public string Temperature { get; set; } = string.Empty;
         public string Humidity { get; set; } = string.Empty;
