@@ -1,0 +1,60 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CultivoApp.Views.HomeView"
+             Background="White">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="30" Spacing="20">
+
+            <!-- Cabeçalho -->
+            <TextBlock Text="🍄 Selecione o tipo de cogumelo"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="#2C3E50"
+                       HorizontalAlignment="Center"/>
+
+            <!-- ComboBox: ItemsSource e SelectedItem com binding normal -->
+            <ComboBox Width="300"
+                      HorizontalAlignment="Center"
+                      ItemsSource="{Binding Mushrooms}"
+                      SelectedItem="{Binding SelectedMushroom, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <!-- Card com imagem e parâmetros -->
+            <Border Background="#FAFAFA"
+                    CornerRadius="12"
+                    Padding="20"
+                    Margin="0,20,0,0"
+                    BorderBrush="#DDD"
+                    BorderThickness="1">
+                <StackPanel HorizontalAlignment="Center" Spacing="10">
+                    <Border Width="220" Height="150" CornerRadius="10" ClipToBounds="True">
+                        <Image Source="{Binding SelectedMushroom.ImagePath}" Stretch="UniformToFill"/>
+                    </Border>
+
+                    <TextBlock Text="{Binding SelectedMushroom.Name}"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#2C3E50"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding SelectedMushroom.Temperature}"
+                               FontSize="14"
+                               Foreground="#444"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding SelectedMushroom.Humidity}"
+                               FontSize="14"
+                               Foreground="#444"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
