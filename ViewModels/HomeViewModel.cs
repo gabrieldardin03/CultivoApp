@@ -1,6 +1,8 @@
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Avalonia.Platform;
 
 namespace CultivoApp.ViewModels
 {
@@ -22,6 +24,13 @@ namespace CultivoApp.ViewModels
             }
         }
 
+        private string _debugMessage = "";
+        public string DebugMessage
+        {
+            get => _debugMessage;
+            set { _debugMessage = value; OnPropertyChanged(); }
+        }
+
         public HomeViewModel()
         {
             Mushrooms = new ObservableCollection<Mushroom>
@@ -31,25 +40,32 @@ namespace CultivoApp.ViewModels
                     Name = "Shimeji Marrom",
                     Temperature = "Temperatura Ideal: 22–24 °C",
                     Humidity = "Umidade Ideal: 80–90 %",
-                    ImagePath = "Assets/Images/cogumelos_shimeji_marrom.jpg"
+                    ImagePath = "avares://CultivoApp/Assets/Images/cogumelos_shimeji_marrom.jpg"
                 },
                 new Mushroom
                 {
                     Name = "Shimeji Rosa",
                     Temperature = "Temperatura Ideal: 20–24 °C",
                     Humidity = "Umidade Ideal: 80–90 %",
-                    ImagePath = "Assets/Images/cogumelo_shimeji_rosa.jpg"
+                    ImagePath = "avares://CultivoApp/Assets/Images/cogumelo_shimeji_rosa.jpg"
                 },
                 new Mushroom
                 {
                     Name = "Champignon",
                     Temperature = "Temperatura Ideal: 18–22 °C",
                     Humidity = "Umidade Ideal: 75–85 %",
-                    ImagePath = "Assets/Images/cogumelos_Champignon.png"
+                    ImagePath = "avares://CultivoApp/Assets/Images/cogumelos_Champignon.png"
                 }
             };
 
             SelectedMushroom = Mushrooms[0];
+
+            // 🔍 TESTE VISUAL NA INTERFACE
+            var uriTest = new Uri(Mushrooms[0].ImagePath);
+            bool exists = AssetLoader.Exists(uriTest);
+            DebugMessage = exists
+                ? "✅ Imagem encontrada corretamente."
+                : "❌ Erro: imagem não encontrada. Caminho incorreto?";
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
