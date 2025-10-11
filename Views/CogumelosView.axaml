@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CultivoApp.Views.CogumelosView">
+
+    <StackPanel Margin="40" Spacing="20" HorizontalAlignment="Center">
+        <TextBlock Text="🍄 Catálogo de Cogumelos"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Foreground="#2C3E50"
+                   HorizontalAlignment="Center"/>
+
+        <ComboBox ItemsSource="{Binding Mushrooms}"
+                  SelectedItem="{Binding SelectedMushroom}"
+                  Width="200"
+                  FontSize="16"/>
+
+        <TextBlock Text="{Binding SelectedMushroom}"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Foreground="#1E2E3E"
+                   Margin="0,20,0,0"/>
+    </StackPanel>
+</UserControl>

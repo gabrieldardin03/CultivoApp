@@ -24,8 +24,18 @@ build_property.EnableCodeStyleSeverity =
 [C:/Users/gabriel dardin/Desktop/estufa2/CultivoApp/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/gabriel dardin/Desktop/estufa2/CultivoApp/Views/CogumelosView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/gabriel dardin/Desktop/estufa2/CultivoApp/Views/HomeView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/Users/gabriel dardin/Desktop/estufa2/CultivoApp/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/gabriel dardin/Desktop/estufa2/CultivoApp/Views/ManualView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

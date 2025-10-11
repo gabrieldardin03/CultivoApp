@@ -1,11 +1,45 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="using:CultivoApp.Views"
+        xmlns:vm="using:CultivoApp.ViewModels"
         x:Class="CultivoApp.Views.MainWindow"
-        Width="1000"
-        Height="700"
-        Background="White"
-        Title="Monitoramento - Estufa Inteligente">
+        Width="900" Height="700"
+        Title="Estufa Inteligente">
 
-    <views:HomeView />
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <DockPanel>
+        <!-- 🔹 Barra de navegação -->
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top"
+                    Background="#F8F9FA"
+                    Padding="20,10"
+                    Spacing="30"
+                    HorizontalAlignment="Center">
+
+            <TextBlock Text="Home"
+                       FontSize="18"
+                       Cursor="Hand"
+                       Foreground="#2C3E50"
+                       FontWeight="Bold"
+                       PointerPressed="OnHomeClicked"/>
+
+            <TextBlock Text="Manual"
+                       FontSize="18"
+                       Cursor="Hand"
+                       Foreground="#2C3E50"
+                       PointerPressed="OnManualClicked"/>
+
+            <TextBlock Text="Cogumelos"
+                       FontSize="18"
+                       Cursor="Hand"
+                       Foreground="#2C3E50"
+                       PointerPressed="OnCogumelosClicked"/>
+        </StackPanel>
+
+        <!-- 🔹 Conteúdo dinâmico -->
+        <ContentControl Content="{Binding CurrentView}" Margin="10"/>
+    </DockPanel>
 </Window>

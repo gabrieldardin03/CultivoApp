@@ -12,6 +12,7 @@
   <!-- 🔹 Inclui todas as imagens e recursos -->
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
+    <AvaloniaXaml Include="Views\**\*.axaml" />
   </ItemGroup>
 
   <ItemGroup>

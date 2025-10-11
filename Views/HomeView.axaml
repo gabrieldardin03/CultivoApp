@@ -56,16 +56,17 @@
 </Border>
 
             <!-- 🔹 ComboBox -->
-            <ComboBox ItemsSource="{Binding Mushrooms}"
-                      SelectedItem="{Binding SelectedMushroom}"
-                      Width="250"
-                      Height="38"
-                      Background="#F5F5F5"
-                      BorderBrush="#CCC"
-                      BorderThickness="1"
-                      CornerRadius="6"
-                      HorizontalAlignment="Center"
-                      FontSize="15">
+            <ComboBox  ItemsSource="{Binding Mushrooms}"
+          SelectedItem="{Binding SelectedMushroom}"
+          Width="250"
+          Height="38"
+          Background="#F5F5F5"
+          Foreground="Black"
+          BorderBrush="#CCC"
+          BorderThickness="1"
+          CornerRadius="6"
+          HorizontalAlignment="Center"
+          FontSize="15">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" FontSize="15"/>
