@@ -5,12 +5,13 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <!-- DESATIVA compiled bindings para evitar problemas de AVLN2100/AVLN3000 -->
+    <!-- Desativa compiled bindings para evitar erros AVLN2100 -->
     <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
+  <!-- 🔹 Inclui todas as imagens e recursos -->
   <ItemGroup>
-    <AvaloniaResource Include="Assets\Images\**" />
+    <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,9 +22,6 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="OxyPlot.Avalonia" Version="2.1.0" />
     <PackageReference Include="System.IO.Ports" Version="9.0.9" />
-    <!-- Se quiser OxyPlot depois adicione:
-         dotnet add package OxyPlot.Avalonia
-    -->
   </ItemGroup>
 
 </Project>

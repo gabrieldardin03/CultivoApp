@@ -1,7 +1,9 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
+using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 
 namespace CultivoApp.ViewModels
@@ -10,7 +12,7 @@ namespace CultivoApp.ViewModels
     {
         public ObservableCollection<Mushroom> Mushrooms { get; }
 
-        private Mushroom _selectedMushroom;
+        private Mushroom _selectedMushroom = null!;
         public Mushroom SelectedMushroom
         {
             get => _selectedMushroom;
@@ -20,15 +22,31 @@ namespace CultivoApp.ViewModels
                 {
                     _selectedMushroom = value;
                     OnPropertyChanged();
+                    LoadImage();
                 }
             }
         }
 
-        private string _debugMessage = "";
+        private Bitmap? _mushroomImage;
+        public Bitmap? MushroomImage
+        {
+            get => _mushroomImage;
+            set
+            {
+                _mushroomImage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _debugMessage = string.Empty;
         public string DebugMessage
         {
             get => _debugMessage;
-            set { _debugMessage = value; OnPropertyChanged(); }
+            set
+            {
+                _debugMessage = value;
+                OnPropertyChanged();
+            }
         }
 
         public HomeViewModel()
@@ -40,32 +58,42 @@ namespace CultivoApp.ViewModels
                     Name = "Shimeji Marrom",
                     Temperature = "Temperatura Ideal: 22–24 °C",
                     Humidity = "Umidade Ideal: 80–90 %",
-                    ImagePath = "avares://CultivoApp/Assets/Images/cogumelos_shimeji_marrom.jpg"
+                    ImagePath = "avares://CultivoApp/Assets/Images/cogumelos_shimeji_marrom.png"
                 },
                 new Mushroom
                 {
                     Name = "Shimeji Rosa",
                     Temperature = "Temperatura Ideal: 20–24 °C",
                     Humidity = "Umidade Ideal: 80–90 %",
-                    ImagePath = "avares://CultivoApp/Assets/Images/cogumelo_shimeji_rosa.jpg"
+                    ImagePath = "avares://CultivoApp/Assets/Images/cogumelo_shimeji_rosa.png"
                 },
                 new Mushroom
                 {
                     Name = "Champignon",
                     Temperature = "Temperatura Ideal: 18–22 °C",
                     Humidity = "Umidade Ideal: 75–85 %",
-                    ImagePath = "avares://CultivoApp/Assets/Images/cogumelos_Champignon.png"
+                    ImagePath = "avares://CultivoApp/Assets/Images/cogumelos_champignon.png"
                 }
             };
 
             SelectedMushroom = Mushrooms[0];
+            LoadImage();
+        }
 
-            // 🔍 TESTE VISUAL NA INTERFACE
-            var uriTest = new Uri(Mushrooms[0].ImagePath);
-            bool exists = AssetLoader.Exists(uriTest);
-            DebugMessage = exists
-                ? "✅ Imagem encontrada corretamente."
-                : "❌ Erro: imagem não encontrada. Caminho incorreto?";
+        private void LoadImage()
+        {
+            try
+            {
+                var uri = new Uri(SelectedMushroom.ImagePath);
+                using var stream = AssetLoader.Open(uri);
+                MushroomImage = new Bitmap(stream);
+                DebugMessage = "✅ Imagem carregada e exibida com sucesso!";
+            }
+            catch (Exception ex)
+            {
+                MushroomImage = null;
+                DebugMessage = $"❌ Erro ao carregar imagem: {ex.Message}";
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
