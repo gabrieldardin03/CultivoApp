@@ -9,10 +9,9 @@
     <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
-  <!-- 🔹 Inclui todas as imagens e recursos -->
+  <!-- 🔹 Inclui apenas imagens e recursos (o Avalonia já encontra os .axaml sozinho) -->
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
-    <AvaloniaXaml Include="Views\**\*.axaml" />
   </ItemGroup>
 
   <ItemGroup>

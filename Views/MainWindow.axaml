@@ -12,32 +12,30 @@
 
     <DockPanel>
         <!-- 🔹 Barra de navegação -->
-        <StackPanel Orientation="Horizontal"
-                    DockPanel.Dock="Top"
-                    Background="#F8F9FA"
-                    Padding="20,10"
-                    Spacing="30"
-                    HorizontalAlignment="Center">
+       <Border Background="#F8F9FA" DockPanel.Dock="Top" Padding="20,10">
+    <StackPanel Orientation="Horizontal"
+                Spacing="30"
+                HorizontalAlignment="Center">
+        <TextBlock Text="Home"
+                   FontSize="18"
+                   Cursor="Hand"
+                   Foreground="#2C3E50"
+                   FontWeight="Bold"
+                   PointerPressed="OnHomeClicked"/>
 
-            <TextBlock Text="Home"
-                       FontSize="18"
-                       Cursor="Hand"
-                       Foreground="#2C3E50"
-                       FontWeight="Bold"
-                       PointerPressed="OnHomeClicked"/>
+        <TextBlock Text="Manual"
+                   FontSize="18"
+                   Cursor="Hand"
+                   Foreground="#2C3E50"
+                   PointerPressed="OnManualClicked"/>
 
-            <TextBlock Text="Manual"
-                       FontSize="18"
-                       Cursor="Hand"
-                       Foreground="#2C3E50"
-                       PointerPressed="OnManualClicked"/>
-
-            <TextBlock Text="Cogumelos"
-                       FontSize="18"
-                       Cursor="Hand"
-                       Foreground="#2C3E50"
-                       PointerPressed="OnCogumelosClicked"/>
-        </StackPanel>
+        <TextBlock Text="Cogumelos"
+                   FontSize="18"
+                   Cursor="Hand"
+                   Foreground="#2C3E50"
+                   PointerPressed="OnCogumelosClicked"/>
+    </StackPanel>
+</Border>
 
         <!-- 🔹 Conteúdo dinâmico -->
         <ContentControl Content="{Binding CurrentView}" Margin="10"/>

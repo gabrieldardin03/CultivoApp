@@ -1,24 +1,63 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CultivoApp.ViewModels"
              x:Class="CultivoApp.Views.CogumelosView">
 
-    <StackPanel Margin="40" Spacing="20" HorizontalAlignment="Center">
-        <TextBlock Text="🍄 Catálogo de Cogumelos"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   Foreground="#2C3E50"
-                   HorizontalAlignment="Center"/>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="40" Spacing="20">
 
-        <ComboBox ItemsSource="{Binding Mushrooms}"
-                  SelectedItem="{Binding SelectedMushroom}"
-                  Width="200"
-                  FontSize="16"/>
+            <!-- 🔹 Título -->
+            <TextBlock Text="🍄 Catálogo de Cogumelos"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="#2C3E50"
+                       HorizontalAlignment="Center"/>
 
-        <TextBlock Text="{Binding SelectedMushroom}"
-                   FontSize="18"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   Foreground="#1E2E3E"
-                   Margin="0,20,0,0"/>
-    </StackPanel>
+            <!-- 🔹 Botões -->
+            <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                <Button Content="Adicionar" 
+                        Command="{Binding AddMushroomCommand}" 
+                        Width="120" Background="#27AE60" Foreground="White"/>
+                <Button Content="Salvar Alterações" 
+                        Command="{Binding SaveChangesCommand}" 
+                        Width="150" Background="#2980B9" Foreground="White"
+                        IsVisible="{Binding IsEditing}"/>
+            </StackPanel>
+
+            <!-- 🔹 Lista de cogumelos -->
+            <ItemsControl ItemsSource="{Binding Mushrooms}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" Padding="15" CornerRadius="10" Margin="0,5"
+                                BorderBrush="#DDD" BorderThickness="1" Effect="drop-shadow(0 0 5 #CCC)">
+                            <Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center" Spacing="10">
+
+                                <!-- Imagem -->
+                                <Image Source="{Binding ImagePath}" Width="70" Height="70" Stretch="Uniform"/>
+
+                                <!-- Informações -->
+                                <StackPanel Grid.Column="1">
+                                    <TextBox Text="{Binding Name}" FontSize="18"
+                                             BorderThickness="0" Background="Transparent"
+                                             IsReadOnly="{Binding DataContext.IsReadOnly, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                    <TextBox Text="{Binding Temperature}" FontSize="14"
+                                             BorderThickness="0" Background="Transparent"
+                                             IsReadOnly="{Binding DataContext.IsReadOnly, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                    <TextBox Text="{Binding Humidity}" FontSize="14"
+                                             BorderThickness="0" Background="Transparent"
+                                             IsReadOnly="{Binding DataContext.IsReadOnly, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                </StackPanel>
+
+                                <!-- Botão Editar -->
+                                <Button Grid.Column="2" Content="Editar"
+                                        Command="{Binding DataContext.EditMushroomCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}"
+                                        Background="#F39C12" Foreground="White" Width="80"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

@@ -1,36 +1,55 @@
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CultivoApp.Services;
 
 namespace CultivoApp.ViewModels
 {
-    public class CogumelosViewModel : INotifyPropertyChanged
+    public partial class CogumelosViewModel : ObservableObject
     {
-        private string _selectedMushroom = "Shimeji Marrom";
-        public string SelectedMushroom
+        public ObservableCollection<Mushroom> Mushrooms => AppDataService.Instance.Mushrooms;
+
+        [ObservableProperty]
+        private Mushroom? selectedMushroom;
+
+        [ObservableProperty]
+        private bool isEditing;
+
+        public bool IsReadOnly => !IsEditing;
+
+        partial void OnIsEditingChanged(bool value)
         {
-            get => _selectedMushroom;
-            set
-            {
-                if (_selectedMushroom != value)
-                {
-                    _selectedMushroom = value;
-                    OnPropertyChanged();
-                }
-            }
+            OnPropertyChanged(nameof(IsReadOnly));
         }
 
-        public ObservableCollection<string> Mushrooms { get; } = new()
+        [RelayCommand]
+        private void AddMushroom()
         {
-            "Shimeji Marrom",
-            "Shimeji Rosa",
-            "Champignon",
-            "Ostra",
-            "Portobello"
-        };
+            var novo = new Mushroom
+            {
+                Name = "Novo Cogumelo",
+                Temperature = "20–25 °C",
+                Humidity = "80–90%",
+                ImagePath = "Assets/default.png"
+            };
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string? name = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            Mushrooms.Add(novo);
+            SelectedMushroom = novo;
+            IsEditing = true;
+        }
+
+        [RelayCommand]
+        private void EditMushroom(Mushroom? mushroom)
+        {
+            if (mushroom == null) return;
+            SelectedMushroom = mushroom;
+            IsEditing = true;
+        }
+
+        [RelayCommand]
+        private void SaveChanges()
+        {
+            IsEditing = false;
+        }
     }
 }

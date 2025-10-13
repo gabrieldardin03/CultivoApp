@@ -40,27 +40,29 @@
                     </StackPanel>
 
                     <!-- Switches de controle -->
-                    <StackPanel Spacing="15" Margin="0,15,0,0">
-
-                        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                            <TextBlock Text="Umidificador"
-                                       FontSize="17"
-                                       Foreground="#1E2E3E"
-                                       Width="220"/>
+                           <StackPanel Spacing="15" Margin="0,15,0,0">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Umidificador" Width="220" FontSize="17" Foreground="#1E2E3E"/>
                             <ToggleSwitch IsChecked="{Binding HumidifierOn}"
-                                          IsEnabled="{Binding IsManual}"
-                                          Width="60" Height="25"/>
+                                        IsEnabled="{Binding IsManual}"
+                                        Width="60" Height="25"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                            <TextBlock Text="Ventilador / Aquecedor"
-                                       FontSize="17"
-                                       Foreground="#1E2E3E"
-                                       Width="220"/>
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Ventilador / Aquecedor" Width="220" FontSize="17" Foreground="#1E2E3E"/>
                             <ToggleSwitch IsChecked="{Binding FanHeaterOn}"
-                                          IsEnabled="{Binding IsManual}"
-                                          Width="60" Height="25"/>
+                                        IsEnabled="{Binding IsManual}"
+                                        Width="60" Height="25"/>
                         </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Exaustor" Width="220" FontSize="17" Foreground="#1E2E3E"/>
+                            <ToggleSwitch IsChecked="{Binding ExhaustOn}"
+                                        IsEnabled="{Binding IsManual}"
+                                        Width="60" Height="25"/>
+                        </StackPanel>
+                    </StackPanel>
+
 
                         <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
                             <TextBlock Text="Exaustor"

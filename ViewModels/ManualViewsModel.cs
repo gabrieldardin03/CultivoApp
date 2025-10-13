@@ -1,64 +1,33 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CultivoApp.ViewModels
 {
-    public class ManualViewModel : INotifyPropertyChanged
+    public partial class ManualViewModel : ObservableObject
     {
-        private bool _isAutomatic = true;
-        public bool IsAutomatic
-        {
-            get => _isAutomatic;
-            set
-            {
-                if (_isAutomatic != value)
-                {
-                    _isAutomatic = value;
-                    OnPropertyChanged();
-                    OnPropertyChanged(nameof(IsManual));
-                }
-            }
-        }
+        [ObservableProperty]
+        private bool isAutomatic = true; // começa no modo automático
+
+        [ObservableProperty]
+        private bool humidifierOn;
+
+        [ObservableProperty]
+        private bool fanHeaterOn;
+
+        [ObservableProperty]
+        private bool exhaustOn;
+
+        [ObservableProperty]
+        private double temperature = 24.3;
+
+        [ObservableProperty]
+        private double humidity = 78.5;
 
         public bool IsManual => !IsAutomatic;
 
-        private bool _humidifierOn;
-        public bool HumidifierOn
+        partial void OnIsAutomaticChanged(bool value)
         {
-            get => _humidifierOn;
-            set { _humidifierOn = value; OnPropertyChanged(); }
+            OnPropertyChanged(nameof(IsManual));
         }
-
-        private bool _fanHeaterOn;
-        public bool FanHeaterOn
-        {
-            get => _fanHeaterOn;
-            set { _fanHeaterOn = value; OnPropertyChanged(); }
-        }
-
-        private bool _exhaustOn;
-        public bool ExhaustOn
-        {
-            get => _exhaustOn;
-            set { _exhaustOn = value; OnPropertyChanged(); }
-        }
-
-        private double _temperature = 24.3;
-        public double Temperature
-        {
-            get => _temperature;
-            set { _temperature = value; OnPropertyChanged(); }
-        }
-
-        private double _humidity = 78.5;
-        public double Humidity
-        {
-            get => _humidity;
-            set { _humidity = value; OnPropertyChanged(); }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string? name = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
+ 

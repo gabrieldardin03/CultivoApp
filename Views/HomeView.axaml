@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="CultivoApp.Views.HomeView">
+             x:Class="CultivoApp.Views.HomeView"
+             Background="White">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="40" Spacing="25" HorizontalAlignment="Center">
