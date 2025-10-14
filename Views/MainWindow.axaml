@@ -4,7 +4,8 @@
         xmlns:vm="using:CultivoApp.ViewModels"
         x:Class="CultivoApp.Views.MainWindow"
         Width="900" Height="700"
-        Title="Estufa Inteligente">
+        Title="Estufa Inteligente"
+        Background="White">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>

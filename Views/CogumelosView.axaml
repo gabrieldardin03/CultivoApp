@@ -30,10 +30,11 @@
                     <DataTemplate>
                         <Border Background="White" Padding="15" CornerRadius="10" Margin="0,5"
                                 BorderBrush="#DDD" BorderThickness="1" Effect="drop-shadow(0 0 5 #CCC)">
-                            <Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center" Spacing="10">
+                            <Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center" Margin="0,5">
 
                                 <!-- Imagem -->
-                                <Image Source="{Binding ImagePath}" Width="70" Height="70" Stretch="Uniform"/>
+                                <Image Source="{Binding ImagePath}" Width="70" Height="70"
+                                       Stretch="Uniform" HorizontalAlignment="Center"/>
 
                                 <!-- Informações -->
                                 <StackPanel Grid.Column="1">
@@ -52,7 +53,7 @@
                                 <Button Grid.Column="2" Content="Editar"
                                         Command="{Binding DataContext.EditMushroomCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                         CommandParameter="{Binding}"
-                                        Background="#F39C12" Foreground="White" Width="80"/>
+                                        Background="#F39C12" Foreground="White" Width="80" MinWidth="80"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

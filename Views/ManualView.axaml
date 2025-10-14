@@ -1,121 +1,63 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="CultivoApp.Views.ManualView">
-
+             x:Class="CultivoApp.Views.ManualView"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="40" Spacing="25" HorizontalAlignment="Center">
 
-            <!-- 🔹 Navegação superior -->
-            <StackPanel Orientation="Horizontal" Spacing="25" HorizontalAlignment="Center">
-                <TextBlock Text="Home"
-                           FontSize="20"
-                           Foreground="#777"/>
-                <TextBlock Text="Manual"
-                           FontSize="20"
-                           FontWeight="Bold"
-                           Foreground="#1E2E3E"
-                           TextDecorations="Underline"/>
-                <TextBlock Text="Cogumelos"
-                           FontSize="20"
-                           Foreground="#777"/>
-            </StackPanel>
-
-            <!-- 🔹 Card de modo -->
-            <Border Background="White"
-                    CornerRadius="15"
-                    Padding="25"
-                    Width="700"
-                    BorderBrush="#EEE"
-                    BorderThickness="1"
-                    Effect="drop-shadow(0 0 10 #DDD)">
+            <!-- Card de controle -->
+            <Border Background="White" CornerRadius="15" Padding="25" Width="700" BorderBrush="#EEE" BorderThickness="1">
                 <StackPanel Spacing="20">
 
                     <!-- Alternância Automático/Manual -->
                     <StackPanel Orientation="Horizontal" Spacing="15" VerticalAlignment="Center">
-                        <TextBlock Text="Modo Automático"
-                                   FontSize="18"
-                                   Foreground="#1E2E3E"
-                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="Modo Automático" FontSize="18" Foreground="#1E2E3E" VerticalAlignment="Center"/>
                         <ToggleSwitch IsChecked="{Binding IsAutomatic}" Width="60" Height="25"/>
                     </StackPanel>
 
-                    <!-- Switches de controle -->
-                           <StackPanel Spacing="15" Margin="0,15,0,0">
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                            <TextBlock Text="Umidificador" Width="220" FontSize="17" Foreground="#1E2E3E"/>
-                            <ToggleSwitch IsChecked="{Binding HumidifierOn}"
-                                        IsEnabled="{Binding IsManual}"
-                                        Width="60" Height="25"/>
+                    <!-- Controles individuais -->
+                    <StackPanel Spacing="15" Margin="0,5,0,0">
+                        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                            <TextBlock Text="Umidificador" FontSize="17" Foreground="#1E2E3E" Width="260"/>
+                            <!-- IsEnabled depende de IsManual -->
+                            <ToggleSwitch IsChecked="{Binding HumidifierOn}" IsEnabled="{Binding IsManual}" Width="60" Height="25"/>
                         </StackPanel>
-
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                            <TextBlock Text="Ventilador / Aquecedor" Width="220" FontSize="17" Foreground="#1E2E3E"/>
-                            <ToggleSwitch IsChecked="{Binding FanHeaterOn}"
-                                        IsEnabled="{Binding IsManual}"
-                                        Width="60" Height="25"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                            <TextBlock Text="Exaustor" Width="220" FontSize="17" Foreground="#1E2E3E"/>
-                            <ToggleSwitch IsChecked="{Binding ExhaustOn}"
-                                        IsEnabled="{Binding IsManual}"
-                                        Width="60" Height="25"/>
-                        </StackPanel>
-                    </StackPanel>
-
 
                         <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                            <TextBlock Text="Exaustor"
-                                       FontSize="17"
-                                       Foreground="#1E2E3E"
-                                       Width="220"/>
-                            <ToggleSwitch IsChecked="{Binding ExhaustOn}"
-                                          IsEnabled="{Binding IsManual}"
-                                          Width="60" Height="25"/>
+                            <TextBlock Text="Ventilador / Aquecedor" FontSize="17" Foreground="#1E2E3E" Width="260"/>
+                            <ToggleSwitch IsChecked="{Binding FanHeaterOn}" IsEnabled="{Binding IsManual}" Width="60" Height="25"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                            <TextBlock Text="Exaustor" FontSize="17" Foreground="#1E2E3E" Width="260"/>
+                            <ToggleSwitch IsChecked="{Binding ExhaustOn}" IsEnabled="{Binding IsManual}" Width="60" Height="25"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Border>
 
-            <!-- 🔹 Leitura de sensores -->
-            <Border Background="White"
-                    CornerRadius="15"
-                    Padding="25"
-                    Width="700"
-                    BorderBrush="#EEE"
-                    BorderThickness="1"
-                    Effect="drop-shadow(0 0 10 #DDD)">
+            <!-- Leitura de sensores -->
+            <Border Background="White" CornerRadius="15" Padding="25" Width="700" BorderBrush="#EEE" BorderThickness="1">
                 <Grid ColumnDefinitions="1*,1*" HorizontalAlignment="Center">
-
-                    <!-- Temperatura -->
                     <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                        <TextBlock Text="Temperatura Atual"
-                                   FontSize="18"
-                                   FontWeight="Bold"
-                                   Foreground="#1E2E3E"
-                                   HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding Temperature, StringFormat='{}{0:F1} °C'}"
-                                   FontSize="30"
-                                   FontWeight="Bold"
-                                   Foreground="#E67E22"
-                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Temperatura Atual" FontSize="18" FontWeight="Bold" Foreground="#1E2E3E" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Temperature, StringFormat='{}{0:F1} °C'}" FontSize="30" FontWeight="Bold" Foreground="#E67E22" HorizontalAlignment="Center"/>
                     </StackPanel>
 
-                    <!-- Umidade -->
                     <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                        <TextBlock Text="Umidade Atual"
-                                   FontSize="18"
-                                   FontWeight="Bold"
-                                   Foreground="#1E2E3E"
-                                   HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding Humidity, StringFormat='{}{0:F1} %'}"
-                                   FontSize="30"
-                                   FontWeight="Bold"
-                                   Foreground="#3498DB"
-                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Umidade Atual" FontSize="18" FontWeight="Bold" Foreground="#1E2E3E" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Humidity, StringFormat='{}{0:F1} %'}" FontSize="30" FontWeight="Bold" Foreground="#3498DB" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Grid>
             </Border>
+
+            <!-- DEBUG rápido: mostra estado (remova depois) -->
+            <TextBlock Text="(DEBUG) IsAutomatic / IsManual:" HorizontalAlignment="Center" Foreground="#999"/>
+            <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding IsAutomatic}" Foreground="#E67E22"/>
+                <TextBlock Text="{Binding IsManual}" Foreground="#3498DB"/>
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

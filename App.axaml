@@ -1,14 +1,8 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="CultivoApp.App"
-             xmlns:local="using:CultivoApp"
-             RequestedThemeVariant="Default">
-
-  <Application.DataTemplates>
-      <local:ViewLocator/>
-  </Application.DataTemplates>
-
-  <Application.Styles>
-      <FluentTheme />
-  </Application.Styles>
+             x:Class="CultivoApp.App">
+    <Application.Styles>
+        <!-- Tema Fluent moderno (Avalonia 11.3) -->
+        <FluentTheme />
+    </Application.Styles>
 </Application>
