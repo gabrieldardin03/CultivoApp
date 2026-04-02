@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CultivoApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+47213e7aa97b69131018c724472d3f10a2a3649b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7910a0cd184e81b9bcba02cd2de62d1eb70dc9c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CultivoApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CultivoApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

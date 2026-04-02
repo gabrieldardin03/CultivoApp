@@ -1,9 +1,9 @@
 {
-  "Id": "d2bb566c-56b3-4651-92f4-8e7aceabb568",
-  "Name": "champignon",
-  "Temperature": "15\u201320 \u00B0C",
+  "Id": "c6afe0fa-0cd9-4b21-a678-b13e60ce0842",
+  "Name": "shimeji marrom",
+  "Temperature": "20\u201325 \u00B0C",
   "Humidity": "80\u201390%",
-  "ImagePath": "Assets/Images/cogumelos_champignon.png",
+  "ImagePath": "Assets/Images/cogumelos_shimeji_marrom.png",
   "TempMin": 0,
   "TempMax": 0,
   "UmidMin": 0,
