@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <!-- Desativa compiled bindings para evitar erros AVLN2100 -->
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <!-- 🔹 Inclui apenas imagens e recursos (o Avalonia já encontra os .axaml sozinho) -->
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.3" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.3" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.3" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="EPPlus" Version="7.0.0" />
+    <PackageReference Include="LiveChartsCore" Version="2.0.0-rc6.1" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc6.1" />
+    <PackageReference Include="OxyPlot.Avalonia" Version="2.1.0" />
+    <PackageReference Include="SkiaSharp" Version="3.119.1" />
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.6" />
+    <PackageReference Include="System.IO.Ports" Version="9.0.9" />
+  </ItemGroup>
+
+</Project>

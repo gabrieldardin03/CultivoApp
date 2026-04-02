@@ -1,0 +1,117 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CultivoApp.Views.HomeView"
+             Background="White">
+
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="40" Spacing="25" HorizontalAlignment="Center">
+
+      <!-- Card principal - informações da espécie -->
+      <Border Background="White"
+              CornerRadius="15"
+              Padding="25"
+              Width="700"
+              BorderBrush="#EEE"
+              BorderThickness="1"
+              Effect="drop-shadow(0 0 10 #DDD)">
+        <StackPanel Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
+
+          <!-- Imagem do cogumelo -->
+          <Image Width="120" Height="120"
+                 Stretch="UniformToFill"
+                 Source="{Binding MushroomImage}"
+                 Margin="0,0,15,0"/>
+
+          <!-- Dados da espécie (faixas ideais) -->
+          <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="{Binding SelectedMushroom.Name}"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       Foreground="#1E2E3E"
+                       Margin="0,0,0,8"/>
+
+            <TextBlock Text="Temperatura ideal:"
+                    FontSize="15" Foreground="#444"/>
+            <TextBlock Text="{Binding SelectedMushroom.Temperature}"
+                    FontSize="15" Foreground="#444" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Umidade ideal:"
+                    FontSize="15" Foreground="#444"/>
+            <TextBlock Text="{Binding SelectedMushroom.Humidity}"
+                    FontSize="15" Foreground="#444"/>
+
+          </StackPanel>
+
+        </StackPanel>
+      </Border>
+
+      <!-- ComboBox para trocar de espécie -->
+      <ComboBox ItemsSource="{Binding Mushrooms}"
+                SelectedItem="{Binding SelectedMushroom}"
+                Width="250"
+                Height="38"
+                Background="#F5F5F5"
+                Foreground="Black"
+                BorderBrush="#CCC"
+                BorderThickness="1"
+                CornerRadius="6"
+                HorizontalAlignment="Center"
+                FontSize="15">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}" FontSize="15"/>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+
+      <!-- Leitura atual (ESP32) -->
+      <Border Background="White"
+              CornerRadius="15"
+              Padding="30"
+              Width="700"
+              BorderBrush="#EEE"
+              BorderThickness="1"
+              Effect="drop-shadow(0 0 10 #DDD)">
+        <Grid ColumnDefinitions="1*,1*" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+          <!-- Temperatura atual -->
+          <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="6">
+            <TextBlock Text="Temperatura Atual"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#1E2E3E"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Temperatura, StringFormat='{}{0:F1} °C'}"
+                       FontSize="30"
+                       FontWeight="Bold"
+                       Foreground="#E67E22"
+                       HorizontalAlignment="Center"
+                       Margin="0,3,0,0"/>
+            <TextBlock Text="{Binding UltimaLeitura, StringFormat='Última leitura: {0}'}"
+                       FontSize="12"
+                       Foreground="#888"
+                       HorizontalAlignment="Center"
+                       Margin="0,6,0,0"/>
+          </StackPanel>
+
+          <!-- Umidade atual -->
+          <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="6">
+            <TextBlock Text="Umidade Atual"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#1E2E3E"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Umidade, StringFormat='{}{0:F1} %'}"
+                       FontSize="30"
+                       FontWeight="Bold"
+                       Foreground="#3498DB"
+                       HorizontalAlignment="Center"
+                       Margin="0,3,0,0"/>
+          </StackPanel>
+
+        </Grid>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

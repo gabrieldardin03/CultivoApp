@@ -1,0 +1,155 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CultivoApp.ViewModels"
+             x:Class="CultivoApp.Views.ManualView"
+             Background="#F5F5F5">
+
+    <UserControl.DataContext>
+        <vm:ManualViewModel/>
+    </UserControl.DataContext>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="30" Spacing="20" HorizontalAlignment="Center">
+
+<Grid ColumnDefinitions="*, Auto" 
+                      RowDefinitions="Auto,Auto,Auto,Auto" 
+                      RowSpacing="15"
+                      VerticalAlignment="Center">
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" 
+                               Text="Modo Automático" 
+                               VerticalAlignment="Center" FontSize="16"
+                               Foreground="Black"/>
+                    <ToggleSwitch Grid.Row="0" Grid.Column="1" 
+                                  IsChecked="{Binding ModoAutomatico}">
+                        
+                        <ToggleSwitch.OnContent>
+                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
+                                       Foreground="Black" VerticalAlignment="Center" Margin="6,0,0,0"/>
+                        </ToggleSwitch.OnContent>
+                        <ToggleSwitch.OffContent>
+                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
+                                       Foreground="Black" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        </ToggleSwitch.OffContent>
+
+                        <ToggleSwitch.Resources>
+                            <SolidColorBrush x:Key="ToggleSwitchFillOff" Color="#D0D0D0"/> 
+                            <SolidColorBrush x:Key="ToggleSwitchFillOn" Color="#90EE90"/> 
+                            <SolidColorBrush x:Key="ToggleSwitchThumbOff" Color="White"/>
+                            <SolidColorBrush x:Key="ToggleSwitchThumbOn" Color="White"/>
+                        </ToggleSwitch.Resources>
+                    </ToggleSwitch>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" 
+                               Text="Umidificador" 
+                               VerticalAlignment="Center" FontSize="16"
+                               Foreground="Black"/>
+                    <ToggleSwitch Grid.Row="1" Grid.Column="1" 
+                                  IsChecked="{Binding UmidificadorLigado}">
+                        
+                        <ToggleSwitch.OnContent>
+                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
+                                       Foreground="Black" VerticalAlignment="Center" Margin="6,0,0,0"/>
+                        </ToggleSwitch.OnContent>
+                        <ToggleSwitch.OffContent>
+                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
+                                       Foreground="Black" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        </ToggleSwitch.OffContent>
+                        
+                        <ToggleSwitch.Resources>
+                            <SolidColorBrush x:Key="ToggleSwitchFillOff" Color="#D0D0D0"/>
+                            <SolidColorBrush x:Key="ToggleSwitchFillOn" Color="#ADD8E6"/> 
+                            <SolidColorBrush x:Key="ToggleSwitchThumbOff" Color="White"/>
+                            <SolidColorBrush x:Key="ToggleSwitchThumbOn" Color="White"/>
+                        </ToggleSwitch.Resources>
+                    </ToggleSwitch>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" 
+                               Text="Ventilador / Aquecedor" 
+                               VerticalAlignment="Center" FontSize="16"
+                               Foreground="Black"/>
+                    <ToggleSwitch Grid.Row="2" Grid.Column="1" 
+                                  IsChecked="{Binding AquecedorLigado}">
+                        
+                        <ToggleSwitch.OnContent>
+                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
+                                       Foreground="Black" VerticalAlignment="Center" Margin="6,0,0,0"/>
+                        </ToggleSwitch.OnContent>
+                        <ToggleSwitch.OffContent>
+                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
+                                       Foreground="Black" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        </ToggleSwitch.OffContent>
+                        
+                        <ToggleSwitch.Resources>
+                            <SolidColorBrush x:Key="ToggleSwitchFillOff" Color="#D0D0D0"/>
+                             <SolidColorBrush x:Key="ToggleSwitchFillOn" Color="#ADD8E6"/>
+                            <SolidColorBrush x:Key="ToggleSwitchThumbOff" Color="White"/>
+                            <SolidColorBrush x:Key="ToggleSwitchThumbOn" Color="White"/>
+                        </ToggleSwitch.Resources>
+                    </ToggleSwitch>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" 
+                               Text="Exaustor" 
+                               VerticalAlignment="Center" FontSize="16"
+                               Foreground="Black"/>
+                    <ToggleSwitch Grid.Row="3" Grid.Column="1" 
+                                  IsChecked="{Binding ExaustorLigado}">
+                        
+                        <ToggleSwitch.OnContent>
+                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
+                                       Foreground="Black" VerticalAlignment="Center" Margin="6,0,0,0"/>
+                        </ToggleSwitch.OnContent>
+                        <ToggleSwitch.OffContent>
+                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
+                                       Foreground="Black" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        </ToggleSwitch.OffContent>
+                        
+                        <ToggleSwitch.Resources>
+                            <SolidColorBrush x:Key="ToggleSwitchFillOff" Color="#D0D0D0"/>
+                             <SolidColorBrush x:Key="ToggleSwitchFillOn" Color="#ADD8E6"/>
+                            <SolidColorBrush x:Key="ToggleSwitchThumbOff" Color="White"/>
+                            <SolidColorBrush x:Key="ToggleSwitchThumbOn" Color="White"/>
+                        </ToggleSwitch.Resources>
+                    </ToggleSwitch>
+                </Grid>
+            <Border Background="White"
+                    CornerRadius="10"
+                    Padding="25"
+                    Width="500"
+                    Effect="drop-shadow(0 0 10 #DDD)">
+                
+                <Grid ColumnDefinitions="*,*" HorizontalAlignment="Stretch">
+
+                    <StackPanel Grid.Column="0" Spacing="5" HorizontalAlignment="Center">
+                        <TextBlock Text="Temperatura Atual" 
+                                   FontSize="16" Foreground="#555" 
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Temperatura}" 
+                                   FontSize="28" FontWeight="Bold" 
+                                   Foreground="#E67E22" 
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Spacing="5" HorizontalAlignment="Center">
+                        <TextBlock Text="Umidade Atual" 
+                                   FontSize="16" Foreground="#555" 
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Umidade}" 
+                                   FontSize="28" FontWeight="Bold" 
+                                   Foreground="#3498DB" 
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Background="#f2f2f2" CornerRadius="8" Padding="10" Width="500">
+                <TextBlock Text="{Binding Status}" 
+                           TextWrapping="Wrap" 
+                           HorizontalAlignment="Center" 
+                           FontSize="14"
+                           Foreground="#444"/>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

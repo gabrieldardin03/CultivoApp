@@ -1,0 +1,87 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CultivoApp.Converters"
+             x:Class="CultivoApp.Views.CogumelosView">
+
+    <UserControl.Resources>
+        <conv:ImagePathToBitmapConverter x:Key="ImagePathConverter"/>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="40" Spacing="20">
+
+            <!-- 🔹 Título -->
+            <TextBlock Text="🍄 Catálogo de Cogumelos"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="#2C3E50"
+                       HorizontalAlignment="Center"/>
+
+            <!-- 🔹 Botões -->
+            <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                <Button Content="Adicionar" 
+                        Command="{Binding AddMushroomCommand}" 
+                        Width="120" Background="#27AE60" Foreground="White"/>
+                <Button Content="Salvar Alterações" 
+                        Command="{Binding SaveChangesCommand}" 
+                        Width="150" Background="#2980B9" Foreground="White"
+                        IsVisible="{Binding IsEditing}"/>
+            </StackPanel>
+
+            <!-- 🔹 Lista de cogumelos -->
+            <ItemsControl ItemsSource="{Binding Mushrooms}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" Padding="15" CornerRadius="10" Margin="0,5"
+                                BorderBrush="#DDD" BorderThickness="1" Effect="drop-shadow(0 0 5 #CCC)">
+                            <Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center" Margin="0,5">
+
+                                <!-- Imagem -->
+                                <StackPanel Orientation="Vertical" Spacing="5">
+                                    <Image Width="70" Height="70"
+                                           Stretch="Uniform"
+                                           HorizontalAlignment="Center"
+                                           Source="{Binding ImagePath, Converter={StaticResource ImagePathConverter}}"/>
+
+                                    <!-- 🔹 Botão Adicionar Imagem -->
+                                    <Button Content="🖼️ Imagem" 
+                                            Command="{Binding DataContext.AdicionarImagemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
+                                            Background="#8E44AD" Foreground="White" FontSize="12"
+                                            HorizontalAlignment="Center"
+                                            Padding="4,2" Width="80"/>
+                                </StackPanel>
+
+                                <!-- Informações -->
+                                <StackPanel Grid.Column="1" Margin="10,0">
+                                    <TextBox Text="{Binding Name}" FontSize="18"
+                                             BorderThickness="1" Background="Black"
+                                             IsReadOnly="{Binding DataContext.IsReadOnly, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                    <TextBox Text="{Binding Temperature}" FontSize="14"
+                                             BorderThickness="1" Background="Black"
+                                             IsReadOnly="{Binding DataContext.IsReadOnly, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                    <TextBox Text="{Binding Humidity}" FontSize="14"
+                                             BorderThickness="1" Background="Black"
+                                             IsReadOnly="{Binding DataContext.IsReadOnly, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                </StackPanel>
+
+                                <!-- 🔹 Botões Editar e Excluir -->
+                                <StackPanel Grid.Column="2" Orientation="Vertical" Spacing="5">
+                                <Button Content="Editar"
+                                        Command="{Binding DataContext.EditMushroomCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}"
+                                        Background="#F39C12" Foreground="White" Width="80"/>
+                                <Button Content="Excluir"
+                                        Command="{Binding DataContext.DeleteMushroomCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}"
+                                        Background="#E74C3C" Foreground="White" Width="80"/>
+                            </StackPanel>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
