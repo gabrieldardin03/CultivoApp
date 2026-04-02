@@ -4623,11 +4623,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\aplicativo_dos_cogumelos-main\\CultivoApp.csproj",
+      "projectUniqueName": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
       "projectName": "CultivoApp",
-      "projectPath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\aplicativo_dos_cogumelos-main\\CultivoApp.csproj",
+      "projectPath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
       "packagesPath": "C:\\Users\\gabriel dardin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\aplicativo_dos_cogumelos-main\\obj\\",
+      "outputPath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gabriel dardin\\AppData\\Roaming\\NuGet\\NuGet.Config"
