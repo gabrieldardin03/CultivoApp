@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -18,8 +19,13 @@ namespace CultivoApp.ViewModels
     {
         public ObservableCollection<Mushroom> Mushrooms => AppDataService.Instance.Mushrooms;
 
-        private readonly HttpClient _httpClient = new();
-        private readonly string ipDoESP = "192.168.1.200";
+        // ✅ HttpClient compartilhado com timeout curto para não travar a UI
+        private static readonly HttpClient _httpClient = new()
+        {
+            Timeout = TimeSpan.FromSeconds(4)
+        };
+
+        private readonly string _ipDoESP = "192.168.1.200";
 
         private Mushroom _selectedMushroom = null!;
         public Mushroom SelectedMushroom
@@ -55,7 +61,9 @@ namespace CultivoApp.ViewModels
 
         public double Temperatura => AppDataService.Instance.TemperaturaAtual;
         public double Umidade => AppDataService.Instance.UmidadeAtual;
-        public string UltimaLeitura => AppDataService.Instance.UltimaLeitura == DateTime.MinValue ? "--:--" : AppDataService.Instance.UltimaLeitura.ToString("HH:mm:ss");
+        public string UltimaLeitura => AppDataService.Instance.UltimaLeitura == DateTime.MinValue
+            ? "--:--"
+            : AppDataService.Instance.UltimaLeitura.ToString("HH:mm:ss");
 
         public double TempMinIdeal { get; set; }
         public double TempMaxIdeal { get; set; }
@@ -82,7 +90,7 @@ namespace CultivoApp.ViewModels
             {
                 try
                 {
-                    var response = await _httpClient.GetAsync($"http://{ipDoESP}/getData");
+                    var response = await _httpClient.GetAsync($"http://{_ipDoESP}/getData");
                     if (response.IsSuccessStatusCode)
                     {
                         var json = await response.Content.ReadAsStringAsync();
@@ -90,13 +98,21 @@ namespace CultivoApp.ViewModels
                         var temp = doc.RootElement.GetProperty("temperatura").GetDouble();
                         var umid = doc.RootElement.GetProperty("umidade").GetDouble();
 
-                        AppDataService.Instance.AtualizarDadosSensor(temp, umid);
-                        DebugMessage = $"🌡 {temp:F1}°C | 💧 {umid:F1}%";
+                        // ✅ Só atualiza se os valores forem válidos (não zera acidentalmente)
+                        if (temp > 0 || umid > 0)
+                        {
+                            AppDataService.Instance.AtualizarDadosSensor(temp, umid);
+                            DebugMessage = $"🌡 {temp:F1}°C | 💧 {umid:F1}%";
+                        }
                     }
                     else
                     {
                         DebugMessage = $"ESP32 offline ({response.StatusCode})";
                     }
+                }
+                catch (TaskCanceledException)
+                {
+                    DebugMessage = "⏱ ESP32 sem resposta (timeout)";
                 }
                 catch
                 {
@@ -113,17 +129,23 @@ namespace CultivoApp.ViewModels
             {
                 var parametros = new
                 {
-                    temp_min = cogumelo.TempMin,
-                    temp_max = cogumelo.TempMax,
-                    umid_min = cogumelo.UmidMin,
-                    umid_max = cogumelo.UmidMax
+                    tempMin = cogumelo.TempMin,
+                    tempMax = cogumelo.TempMax,
+                    umidMin = cogumelo.UmidMin,
+                    umidMax = cogumelo.UmidMax
                 };
 
                 var json = JsonSerializer.Serialize(parametros);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PostAsync($"http://{ipDoESP}/updateConfig", content);
-                DebugMessage = response.IsSuccessStatusCode ? "✅ Configuração enviada com sucesso." : "⚠️ Falha ao enviar configuração.";
+                var response = await _httpClient.PostAsync($"http://{_ipDoESP}/updateConfig", content);
+                DebugMessage = response.IsSuccessStatusCode
+                    ? "✅ Configuração enviada com sucesso."
+                    : "⚠️ Falha ao enviar configuração.";
+            }
+            catch (TaskCanceledException)
+            {
+                DebugMessage = "⏱ Timeout ao enviar configuração.";
             }
             catch (Exception ex)
             {

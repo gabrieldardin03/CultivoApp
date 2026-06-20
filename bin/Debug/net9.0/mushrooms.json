@@ -20,5 +20,16 @@
     "TempMax": 0,
     "UmidMin": 0,
     "UmidMax": 0
+  },
+  {
+    "Id": "fa98e9f8-3099-4fe7-884a-4a8d00bd7990",
+    "Name": "Novo Cogumelo",
+    "Temperature": "20\u201325 \u00B0C",
+    "Humidity": "90\u201395%",
+    "ImagePath": "avares://CultivoApp/Assets/default.png",
+    "TempMin": 0,
+    "TempMax": 0,
+    "UmidMin": 0,
+    "UmidMax": 0
   }
 ]

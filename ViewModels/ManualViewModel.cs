@@ -4,14 +4,23 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CultivoApp.ViewModels
 {
     public class ManualViewModel : INotifyPropertyChanged
     {
-        private readonly HttpClient _httpClient = new();
-        private readonly string ipDoESP = "192.168.1.200"; // troque conforme o IP real do ESP32
+        // ✅ HttpClient estático compartilhado com timeout curto
+        private static readonly HttpClient _httpClient = new()
+        {
+            Timeout = TimeSpan.FromSeconds(4)
+        };
+
+        private readonly string _ipDoESP = "192.168.1.200";
+
+        // ✅ Debounce: cancela envio anterior se o usuário clicar rápido
+        private CancellationTokenSource? _debounceCts;
 
         private bool _modoAutomatico;
         public bool ModoAutomatico
@@ -22,8 +31,8 @@ namespace CultivoApp.ViewModels
                 if (_modoAutomatico != value)
                 {
                     _modoAutomatico = value;
-                    _ = EnviarComandoAsync("modoAutomatico", value);
                     OnPropertyChanged();
+                    AgendarEnvio();
                 }
             }
         }
@@ -37,8 +46,8 @@ namespace CultivoApp.ViewModels
                 if (_umidificadorLigado != value)
                 {
                     _umidificadorLigado = value;
-                    _ = EnviarComandoAsync("umidificador", value);
                     OnPropertyChanged();
+                    AgendarEnvio();
                 }
             }
         }
@@ -52,8 +61,8 @@ namespace CultivoApp.ViewModels
                 if (_exaustorLigado != value)
                 {
                     _exaustorLigado = value;
-                    _ = EnviarComandoAsync("exaustor", value);
                     OnPropertyChanged();
+                    AgendarEnvio();
                 }
             }
         }
@@ -67,8 +76,8 @@ namespace CultivoApp.ViewModels
                 if (_aquecedorLigado != value)
                 {
                     _aquecedorLigado = value;
-                    _ = EnviarComandoAsync("aquecedor", value);
                     OnPropertyChanged();
+                    AgendarEnvio();
                 }
             }
         }
@@ -99,6 +108,26 @@ namespace CultivoApp.ViewModels
             _ = AtualizarLeiturasPeriodicamente();
         }
 
+        // ✅ Debounce: espera 300ms antes de enviar
+        // Se o usuário clicar de novo nesse intervalo, cancela e recomeça
+        private void AgendarEnvio()
+        {
+            _debounceCts?.Cancel();
+            _debounceCts = new CancellationTokenSource();
+            var token = _debounceCts.Token;
+
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(300, token);
+                    if (!token.IsCancellationRequested)
+                        await EnviarTodosEstadosAsync();
+                }
+                catch (TaskCanceledException) { }
+            });
+        }
+
         private async Task AtualizarLeiturasPeriodicamente()
         {
             while (true)
@@ -112,15 +141,20 @@ namespace CultivoApp.ViewModels
         {
             try
             {
-                var response = await _httpClient.GetStringAsync($"http://{ipDoESP}/getData");
+                var response = await _httpClient.GetStringAsync($"http://{_ipDoESP}/getData");
                 var data = JsonSerializer.Deserialize<SensorData>(response);
 
-                if (data != null)
+                if (data != null && (data.temperatura > 0 || data.umidade > 0))
                 {
+                    // ✅ Só atualiza se os valores forem válidos (não zera acidentalmente)
                     Temperatura = $"{data.temperatura:F1} °C";
                     Umidade = $"{data.umidade:F1} %";
                     Status = "✅ Comunicação ativa com ESP32";
                 }
+            }
+            catch (TaskCanceledException)
+            {
+                Status = "⏱ ESP32 sem resposta (timeout)";
             }
             catch
             {
@@ -128,21 +162,35 @@ namespace CultivoApp.ViewModels
             }
         }
 
-        private async Task EnviarComandoAsync(string dispositivo, bool ligado)
+        // ✅ Rota correta /updateConfig com todos os campos que o ESP32 espera
+        private async Task EnviarTodosEstadosAsync()
         {
             try
             {
-                var json = JsonSerializer.Serialize(new { device = dispositivo, state = ligado });
+                var payload = new
+                {
+                    modoAutomatico = _modoAutomatico,
+                    umidificador   = _umidificadorLigado,
+                    ventilador     = _aquecedorLigado,   // ESP32 chama o aquecedor de "ventilador"
+                    exaustor       = _exaustorLigado
+                };
+
+                var json = JsonSerializer.Serialize(payload);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync($"http://{ipDoESP}/manualControl", content);
+
+                var response = await _httpClient.PostAsync($"http://{_ipDoESP}/updateConfig", content);
 
                 Status = response.IsSuccessStatusCode
-                    ? $"✅ {dispositivo} {(ligado ? "ligado" : "desligado")}."
-                    : $"⚠️ Falha ao enviar comando.";
+                    ? "✅ Comando enviado com sucesso."
+                    : $"⚠️ Falha ao enviar comando ({(int)response.StatusCode}).";
             }
-            catch
+            catch (TaskCanceledException)
             {
-                Status = "⚠️ Não foi possível se comunicar com o ESP32.";
+                Status = "⏱ Timeout ao enviar comando.";
+            }
+            catch (Exception ex)
+            {
+                Status = $"⚠️ Erro: {ex.Message}";
             }
         }
 

@@ -24,11 +24,11 @@
                                   IsChecked="{Binding ModoAutomatico}">
                         
                         <ToggleSwitch.OnContent>
-                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
+                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
                                        Foreground="Black" VerticalAlignment="Center" Margin="6,0,0,0"/>
                         </ToggleSwitch.OnContent>
                         <ToggleSwitch.OffContent>
-                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
+                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
                                        Foreground="Black" VerticalAlignment="Center" Margin="0,0,6,0"/>
                         </ToggleSwitch.OffContent>
 
@@ -48,11 +48,11 @@
                                   IsChecked="{Binding UmidificadorLigado}">
                         
                         <ToggleSwitch.OnContent>
-                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
+                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
                                        Foreground="Black" VerticalAlignment="Center" Margin="6,0,0,0"/>
                         </ToggleSwitch.OnContent>
                         <ToggleSwitch.OffContent>
-                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
+                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
                                        Foreground="Black" VerticalAlignment="Center" Margin="0,0,6,0"/>
                         </ToggleSwitch.OffContent>
                         
@@ -72,11 +72,11 @@
                                   IsChecked="{Binding AquecedorLigado}">
                         
                         <ToggleSwitch.OnContent>
-                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
+                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
                                        Foreground="Black" VerticalAlignment="Center" Margin="6,0,0,0"/>
                         </ToggleSwitch.OnContent>
                         <ToggleSwitch.OffContent>
-                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
+                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
                                        Foreground="Black" VerticalAlignment="Center" Margin="0,0,6,0"/>
                         </ToggleSwitch.OffContent>
                         
@@ -96,11 +96,11 @@
                                   IsChecked="{Binding ExaustorLigado}">
                         
                         <ToggleSwitch.OnContent>
-                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
+                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
                                        Foreground="Black" VerticalAlignment="Center" Margin="6,0,0,0"/>
                         </ToggleSwitch.OnContent>
                         <ToggleSwitch.OffContent>
-                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
+                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
                                        Foreground="Black" VerticalAlignment="Center" Margin="0,0,6,0"/>
                         </ToggleSwitch.OffContent>
                         
