@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
 using CultivoApp.Models;
-using CultivoApp.Services; // 👈 Certifique-se que este using está aqui
+using CultivoApp.Services;
 
 namespace CultivoApp.Services
 {
@@ -24,18 +24,17 @@ namespace CultivoApp.Services
 
         private AppDataService() => LoadData();
 
-        public void AtualizarDadosSensor(double temperatura, double umidade)
+        // ✅ Atualizado para receber os estados reais vindos da estufa
+        public void AtualizarDadosSensor(double temperatura, double umidade, bool modoAuto, bool aquecedor, bool umidificador, bool exaustor)
         {
             TemperaturaAtual = temperatura;
             UmidadeAtual = umidade;
             UltimaLeitura = DateTime.Now;
 
-            // ✅✅ A SOLUÇÃO ESTÁ AQUI ✅✅
-            // Cada vez que o sensor é lido, salvamos automaticamente
-            // no histórico persistente.
-            DadosHistoricosService.Instance.Adicionar(temperatura, umidade);
-
-            // Dispara o evento (caso algum outro serviço precise dele)
+            // Salva no histórico persistente com o que estava ligado/desligado de verdade
+            DadosHistoricosService.Instance.Adicionar(temperatura, umidade, modoAuto, aquecedor, umidificador, exaustor);
+            
+            // Dispara o evento para atualizar a interface/gráficos
             DadosAtualizados?.Invoke();
         }
 

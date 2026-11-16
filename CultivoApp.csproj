@@ -7,9 +7,11 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <!-- Desativa compiled bindings para evitar erros AVLN2100 -->
     <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+    <!-- Silencia os avisos de versão de framework antigo (NU1701) -->
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
   </PropertyGroup>
 
-  <!-- 🔹 Inclui apenas imagens e recursos (o Avalonia já encontra os .axaml sozinho) -->
+  <!-- 🔹 Inclui apenas imagens e recursos -->
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
@@ -17,6 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.3" />
     <PackageReference Include="Avalonia.Desktop" Version="11.3.3" />
+    <PackageReference Include="Avalonia.Headless" Version="11.3.3" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.3" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.3" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />

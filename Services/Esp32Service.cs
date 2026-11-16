@@ -46,10 +46,6 @@ public class Esp32Service
         }
     }
 
-    // ==============================
-    // BUSCAR DADOS
-    // ==============================
-
     public async Task<SensorData?> BuscarDadosAsync()
     {
         try
@@ -83,12 +79,50 @@ public class Esp32Service
                 string url = $"http://{_ip}/getData";
                 var response = await _httpClient.GetStringAsync(url);
 
-                return JsonSerializer.Deserialize<SensorData>(response);
+                var opcoes = new JsonSerializerOptions 
+                { 
+                    PropertyNameCaseInsensitive = true 
+                };
+
+                return JsonSerializer.Deserialize<SensorData>(response, opcoes);
             }
         }
         catch
         {
             return null;
+        }
+    }
+
+    public async Task<bool> AtualizarConfiguracaoAsync(string cultura, float tempMin, float tempMax, float umidMin, float umidMax, bool modoAuto = true)
+    {
+        try
+        {
+            if (_tipoConexao == TipoConexao.Wifi && _httpClient != null && _ip != null)
+            {
+                string url = $"http://{_ip}/updateConfig";
+                
+                var dados = new
+                {
+                    cultura = cultura,
+                    tempMin = tempMin,
+                    tempMax = tempMax,
+                    umidMin = umidMin,
+                    umidMax = umidMax,
+                    modoAutomatico = modoAuto
+                };
+
+                string json = JsonSerializer.Serialize(dados);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PostAsync(url, content);
+                return response.IsSuccessStatusCode;
+            }
+
+            return false;
+        }
+        catch
+        {
+            return false;
         }
     }
 }

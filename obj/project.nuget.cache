@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ngdjjBSOfJc=",
+  "dgSpecHash": "2bJhzIsZ5VI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
+  "projectFilePath": "C:\\Users\\gabriel dardin\\Downloads\\estufaprojeto\\estufaTCC\\CultivoApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gabriel dardin\\.nuget\\packages\\avalonia\\11.3.3\\avalonia.11.3.3.nupkg.sha512",
     "C:\\Users\\gabriel dardin\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.25547.20250602\\avalonia.angle.windows.natives.2.1.25547.20250602.nupkg.sha512",
@@ -10,6 +10,7 @@
     "C:\\Users\\gabriel dardin\\.nuget\\packages\\avalonia.desktop\\11.3.3\\avalonia.desktop.11.3.3.nupkg.sha512",
     "C:\\Users\\gabriel dardin\\.nuget\\packages\\avalonia.fonts.inter\\11.3.3\\avalonia.fonts.inter.11.3.3.nupkg.sha512",
     "C:\\Users\\gabriel dardin\\.nuget\\packages\\avalonia.freedesktop\\11.3.3\\avalonia.freedesktop.11.3.3.nupkg.sha512",
+    "C:\\Users\\gabriel dardin\\.nuget\\packages\\avalonia.headless\\11.3.3\\avalonia.headless.11.3.3.nupkg.sha512",
     "C:\\Users\\gabriel dardin\\.nuget\\packages\\avalonia.native\\11.3.3\\avalonia.native.11.3.3.nupkg.sha512",
     "C:\\Users\\gabriel dardin\\.nuget\\packages\\avalonia.remote.protocol\\11.3.3\\avalonia.remote.protocol.11.3.3.nupkg.sha512",
     "C:\\Users\\gabriel dardin\\.nuget\\packages\\avalonia.skia\\11.3.3\\avalonia.skia.11.3.3.nupkg.sha512",
@@ -82,54 +83,5 @@
     "C:\\Users\\gabriel dardin\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\gabriel dardin\\.nuget\\packages\\tmds.dbus.protocol\\0.21.2\\tmds.dbus.protocol.0.21.2.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "message": "Package 'OpenTK 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
-      "libraryId": "OpenTK",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "message": "Package 'OpenTK.GLControl 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
-      "libraryId": "OpenTK.GLControl",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "message": "Package 'SkiaSharp.Views 2.88.6' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
-      "libraryId": "SkiaSharp.Views",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "message": "Package 'SkiaSharp.Views.Gtk2 2.88.6' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
-      "projectPath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
-      "libraryId": "SkiaSharp.Views.Gtk2",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  "logs": []
 }

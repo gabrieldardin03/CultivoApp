@@ -1,7 +1,11 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:conv="clr-namespace:CultivoApp.Converters"
-             x:Class="CultivoApp.Views.CogumelosView">
+             xmlns:vm="using:CultivoApp.ViewModels"
+             xmlns:models="using:CultivoApp.Models"
+             x:Class="CultivoApp.Views.CogumelosView"
+             x:DataType="vm:CogumelosViewModel"
+             x:Name="RootControl">
 
     <UserControl.Resources>
         <conv:ImagePathToBitmapConverter x:Key="ImagePathConverter"/>
@@ -31,9 +35,9 @@
             <!-- 🔹 Lista de cogumelos -->
             <ItemsControl ItemsSource="{Binding Mushrooms}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate DataType="models:Mushroom">
                         <Border Background="White" Padding="15" CornerRadius="10" Margin="0,5"
-                                BorderBrush="#DDD" BorderThickness="1" Effect="drop-shadow(0 0 5 #CCC)">
+                                BorderBrush="#DDD" BorderThickness="1">
                             <Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center" Margin="0,5">
 
                                 <!-- Imagem -->
@@ -43,39 +47,73 @@
                                            HorizontalAlignment="Center"
                                            Source="{Binding ImagePath, Converter={StaticResource ImagePathConverter}}"/>
 
-                                    <!-- 🔹 Botão Adicionar Imagem -->
                                     <Button Content="🖼️ Imagem" 
-                                            Command="{Binding DataContext.AdicionarImagemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            Command="{Binding #RootControl.DataContext.AdicionarImagemCommand}"
                                             CommandParameter="{Binding}"
                                             Background="#8E44AD" Foreground="White" FontSize="12"
                                             HorizontalAlignment="Center"
                                             Padding="4,2" Width="80"/>
                                 </StackPanel>
 
-                                <!-- Informações -->
-                                <StackPanel Grid.Column="1" Margin="10,0">
-                                    <TextBox Text="{Binding Name}" FontSize="18"
-                                             BorderThickness="1" Background="Black"
-                                             IsReadOnly="{Binding DataContext.IsReadOnly, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                                    <TextBox Text="{Binding Temperature}" FontSize="14"
-                                             BorderThickness="1" Background="Black"
-                                             IsReadOnly="{Binding DataContext.IsReadOnly, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-                                    <TextBox Text="{Binding Humidity}" FontSize="14"
-                                             BorderThickness="1" Background="Black"
-                                             IsReadOnly="{Binding DataContext.IsReadOnly, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                <!-- Informações (TEXTOS VISUAIS E PARÂMETROS NUMÉRICOS) -->
+                                <StackPanel Grid.Column="1" Margin="10,0" Spacing="5">
+                                    <TextBox Text="{Binding Name}" FontSize="18" FontWeight="Bold"
+                                             BorderThickness="1" Background="White" Foreground="Black"
+                                             Watermark="Nome do Cogumelo"
+                                             IsReadOnly="{Binding #RootControl.DataContext.IsReadOnly}"/>
+                                    
+                                    <!-- Campos de Texto para o visor na Home -->
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <TextBox Text="{Binding Temperature}" FontSize="14" Width="150"
+                                                 BorderThickness="1" Background="White" Foreground="Black"
+                                                 Watermark="Texto Ex. 18-25 °C"
+                                                 IsReadOnly="{Binding #RootControl.DataContext.IsReadOnly}"/>
+                                        
+                                        <TextBox Text="{Binding Humidity}" FontSize="14" Width="150"
+                                                 BorderThickness="1" Background="White" Foreground="Black"
+                                                 Watermark="Texto Ex. 90-95%"
+                                                 IsReadOnly="{Binding #RootControl.DataContext.IsReadOnly}"/>
+                                    </StackPanel>
+
+                                    <!-- NOVA PARTE: Limites Numéricos Reais (Para o ESP32) -->
+                                    <StackPanel Orientation="Horizontal" Spacing="15" IsVisible="{Binding #RootControl.DataContext.IsEditing}" Margin="0,5,0,0">
+                                        
+                                        <!-- Bloco Temp Min/Max -->
+                                        <StackPanel Orientation="Vertical" Spacing="2">
+                                            <TextBlock Text="Limites de Temp (°C)" FontSize="11" Foreground="Gray" FontWeight="Bold"/>
+                                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                                <NumericUpDown Value="{Binding TempMin}" Minimum="0" Maximum="50" Increment="0.5" Width="100" Background="White" Foreground="Black" FormatString="F1"/>
+                                                <TextBlock Text="até" VerticalAlignment="Center" Foreground="Gray"/>
+                                                <NumericUpDown Value="{Binding TempMax}" Minimum="0" Maximum="50" Increment="0.5" Width="100" Background="White" Foreground="Black" FormatString="F1"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- Bloco Umid Min/Max -->
+                                        <StackPanel Orientation="Vertical" Spacing="2">
+                                            <TextBlock Text="Limites de Umidade (%)" FontSize="11" Foreground="Gray" FontWeight="Bold"/>
+                                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                                <NumericUpDown Value="{Binding UmidMin}" Minimum="0" Maximum="100" Increment="1" Width="100" Background="White" Foreground="Black" FormatString="F0"/>
+                                                <TextBlock Text="até" VerticalAlignment="Center" Foreground="Gray"/>
+                                                <NumericUpDown Value="{Binding UmidMax}" Minimum="0" Maximum="100" Increment="1" Width="100" Background="White" Foreground="Black" FormatString="F0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                    
                                 </StackPanel>
 
-                                <!-- 🔹 Botões Editar e Excluir -->
+                                <!-- Botões Editar e Excluir -->
                                 <StackPanel Grid.Column="2" Orientation="Vertical" Spacing="5">
-                                <Button Content="Editar"
-                                        Command="{Binding DataContext.EditMushroomCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                        CommandParameter="{Binding}"
-                                        Background="#F39C12" Foreground="White" Width="80"/>
-                                <Button Content="Excluir"
-                                        Command="{Binding DataContext.DeleteMushroomCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                        CommandParameter="{Binding}"
-                                        Background="#E74C3C" Foreground="White" Width="80"/>
-                            </StackPanel>
+                                    <Button Content="Editar"
+                                            Command="{Binding #RootControl.DataContext.EditMushroomCommand}"
+                                            CommandParameter="{Binding}"
+                                            Background="#F39C12" Foreground="White" Width="80"/>
+                                    
+                                    <Button Content="Excluir"
+                                            Command="{Binding #RootControl.DataContext.DeleteMushroomCommand}"
+                                            CommandParameter="{Binding}"
+                                            Background="#E74C3C" Foreground="White" Width="80"/>
+                                </StackPanel>
 
                             </Grid>
                         </Border>

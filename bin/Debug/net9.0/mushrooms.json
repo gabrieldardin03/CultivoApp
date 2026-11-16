@@ -1,8 +1,8 @@
 [
   {
     "Id": "c6afe0fa-0cd9-4b21-a678-b13e60ce0842",
-    "Name": "shimeji marrom",
-    "Temperature": "20\u201325 \u00B0C",
+    "Name": "shimeji cinza",
+    "Temperature": "10\u201321 \u00B0C",
     "Humidity": "80\u201390%",
     "ImagePath": "Assets/Images/cogumelos_shimeji_marrom.png",
     "TempMin": 0,
@@ -14,7 +14,7 @@
     "Id": "d2bb566c-56b3-4651-92f4-8e7aceabb568",
     "Name": "champignon",
     "Temperature": "15\u201320 \u00B0C",
-    "Humidity": "80\u201390%",
+    "Humidity": "87\u201390%",
     "ImagePath": "Assets/Images/cogumelos_champignon.png",
     "TempMin": 0,
     "TempMax": 0,
@@ -22,14 +22,14 @@
     "UmidMax": 0
   },
   {
-    "Id": "fa98e9f8-3099-4fe7-884a-4a8d00bd7990",
-    "Name": "Novo Cogumelo",
-    "Temperature": "20\u201325 \u00B0C",
+    "Id": "e999f6db-9038-49d0-b788-b6f589bbea32",
+    "Name": "Shimeji Branco ",
+    "Temperature": "18\u201325 \u00B0C",
     "Humidity": "90\u201395%",
-    "ImagePath": "avares://CultivoApp/Assets/default.png",
-    "TempMin": 0,
-    "TempMax": 0,
-    "UmidMin": 0,
-    "UmidMax": 0
+    "ImagePath": "Assets/Images/images (1).png",
+    "TempMin": 17.5,
+    "TempMax": 25.5,
+    "UmidMin": 90,
+    "UmidMax": 95
   }
 ]

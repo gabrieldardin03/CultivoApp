@@ -1,0 +1,24 @@
+[
+  {
+    "Id": "a0aefff2-3c91-4926-a7f4-b55c4c0abe7b",
+    "Name": "shimeji cinza ",
+    "Temperature": "10\u201321 \u00B0C",
+    "Humidity": "80\u201390%",
+    "ImagePath": "Assets/Images/images (1).png",
+    "TempMin": 20,
+    "TempMax": 25,
+    "UmidMin": 80,
+    "UmidMax": 90
+  },
+  {
+    "Id": "db409ec9-66c9-4a9c-bfcc-80b733ff642c",
+    "Name": "shimeji branco",
+    "Temperature": "17\u201327 \u00B0C",
+    "Humidity": "85\u201392%",
+    "ImagePath": "Assets/Images/images (1).png",
+    "TempMin": 20,
+    "TempMax": 25,
+    "UmidMin": 80,
+    "UmidMax": 90
+  }
+]

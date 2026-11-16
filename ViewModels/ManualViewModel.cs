@@ -17,7 +17,7 @@ namespace CultivoApp.ViewModels
             Timeout = TimeSpan.FromSeconds(4)
         };
 
-        private readonly string _ipDoESP = "192.168.1.200";
+        private readonly string _ipDoESP = "192.168.1.10";
 
         // ✅ Debounce: cancela envio anterior se o usuário clicar rápido
         private CancellationTokenSource? _debounceCts;

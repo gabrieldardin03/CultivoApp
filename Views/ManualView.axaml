@@ -17,18 +17,18 @@
                       VerticalAlignment="Center">
 
                     <TextBlock Grid.Row="0" Grid.Column="0" 
-                               Text="Modo Automático" 
+                               Text="Modo " 
                                VerticalAlignment="Center" FontSize="16"
                                Foreground="Black"/>
                     <ToggleSwitch Grid.Row="0" Grid.Column="1" 
                                   IsChecked="{Binding ModoAutomatico}">
                         
                         <ToggleSwitch.OnContent>
-                            <TextBlock Text="OFF" FontSize="10" FontWeight="Bold" 
+                            <TextBlock Text="AUTOMATICO" FontSize="10" FontWeight="Bold" 
                                        Foreground="Black" VerticalAlignment="Center" Margin="6,0,0,0"/>
                         </ToggleSwitch.OnContent>
                         <ToggleSwitch.OffContent>
-                            <TextBlock Text="ON" FontSize="10" FontWeight="Bold" 
+                            <TextBlock Text="MANUAL" FontSize="10" FontWeight="Bold" 
                                        Foreground="Black" VerticalAlignment="Center" Margin="0,0,6,0"/>
                         </ToggleSwitch.OffContent>
 

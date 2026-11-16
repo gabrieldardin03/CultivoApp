@@ -19,13 +19,16 @@ namespace CultivoApp.ViewModels
     {
         public ObservableCollection<Mushroom> Mushrooms => AppDataService.Instance.Mushrooms;
 
-        // ✅ HttpClient compartilhado com timeout curto para não travar a UI
-        private static readonly HttpClient _httpClient = new()
-        {
-            Timeout = TimeSpan.FromSeconds(4)
-        };
+        // ✅ HttpClient no modo padrão (Keep-Alive) sem forçar o fechamento
+        private static readonly HttpClient _httpClient = CriarClienteHttp();
 
-        private readonly string _ipDoESP = "192.168.1.200";
+        private static HttpClient CriarClienteHttp()
+        {
+            var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
+            return client;
+        }
+
+        private readonly string _ipDoESP = "192.168.1.10";
 
         private Mushroom _selectedMushroom = null!;
         public Mushroom SelectedMushroom
@@ -95,13 +98,21 @@ namespace CultivoApp.ViewModels
                     {
                         var json = await response.Content.ReadAsStringAsync();
                         using var doc = JsonDocument.Parse(json);
-                        var temp = doc.RootElement.GetProperty("temperatura").GetDouble();
-                        var umid = doc.RootElement.GetProperty("umidade").GetDouble();
+                        var root = doc.RootElement;
 
-                        // ✅ Só atualiza se os valores forem válidos (não zera acidentalmente)
+                        var temp = root.GetProperty("temperatura").GetDouble();
+                        var umid = root.GetProperty("umidade").GetDouble();
+                        
+                        // Lendo os estados dos relés e modo automático para salvar no histórico
+                        bool modoAuto = root.GetProperty("modoAutomatico").GetBoolean();
+                        bool aquecedor = root.GetProperty("ventiladorLigado").GetBoolean();
+                        bool umidificador = root.GetProperty("umidificadorLigado").GetBoolean();
+                        bool exaustor = root.GetProperty("exaustorLigado").GetBoolean();
+
                         if (temp > 0 || umid > 0)
                         {
-                            AppDataService.Instance.AtualizarDadosSensor(temp, umid);
+                            // Chamando com os 6 parâmetros exigidos pelo AppDataService
+                            AppDataService.Instance.AtualizarDadosSensor(temp, umid, modoAuto, aquecedor, umidificador, exaustor);
                             DebugMessage = $"🌡 {temp:F1}°C | 💧 {umid:F1}%";
                         }
                     }
@@ -119,7 +130,8 @@ namespace CultivoApp.ViewModels
                     DebugMessage = "❌ Tentando reconectar ao ESP32...";
                 }
 
-                await Task.Delay(5000);
+                // 🔹 Tempo de respiro ideal: 30 segundos
+                await Task.Delay(30000);
             }
         }
 
@@ -129,10 +141,12 @@ namespace CultivoApp.ViewModels
             {
                 var parametros = new
                 {
+                    cultura = cogumelo.Name,
                     tempMin = cogumelo.TempMin,
                     tempMax = cogumelo.TempMax,
                     umidMin = cogumelo.UmidMin,
-                    umidMax = cogumelo.UmidMax
+                    umidMax = cogumelo.UmidMax,
+                    modoAutomatico = true
                 };
 
                 var json = JsonSerializer.Serialize(parametros);

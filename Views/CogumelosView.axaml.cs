@@ -7,8 +7,9 @@ namespace CultivoApp.Views
     {
         public CogumelosView()
         {
-            InitializeComponent();
+            // O DataContext DEVE vir antes do InitializeComponent para os Bindings não quebrarem!
             DataContext = new CogumelosViewModel();
+            InitializeComponent();
         }
     }
 }

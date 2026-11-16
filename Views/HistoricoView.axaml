@@ -4,9 +4,10 @@
              xmlns:vm="using:CultivoApp.ViewModels"
              x:Class="CultivoApp.Views.HistoricoView">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="25">
-        <StackPanel Spacing="15">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20">
+        <StackPanel Spacing="20">
 
+            <!-- Título da Página -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
                 <TextBlock Text="📊" FontSize="22" Foreground="#000000"/>
                 <TextBlock Text="Histórico de Temperatura e Umidade"
@@ -15,86 +16,117 @@
                            Foreground="#000000"/>
             </StackPanel>
 
+            <!-- Janela de Tempo -->
             <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
                 <TextBlock Text="Janela de Tempo (Tempo Real):" 
                            VerticalAlignment="Center" 
                            Foreground="Black"
                            FontWeight="SemiBold"/>
                 
-                <Button Content="5 Minutos"
-                        Command="{Binding MudarPeriodoCommand}"
-                        CommandParameter="5M"
-                        Background="#5BC0DE" Foreground="White"
-                        FontWeight="SemiBold" CornerRadius="4"/>
-                
-                <Button Content="30 Minutos"
-                        Command="{Binding MudarPeriodoCommand}"
-                        CommandParameter="30M"
-                        Background="#5BC0DE" Foreground="White"
-                        FontWeight="SemiBold" CornerRadius="4"/>
-                
-                <Button Content="1 Hora"
-                        Command="{Binding MudarPeriodoCommand}"
-                        CommandParameter="1H"
-                        Background="#5BC0DE" Foreground="White"
-                        FontWeight="SemiBold" CornerRadius="4"/>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center" Margin="0,5,0,0">
-                <Button Content="Exportar Histórico Completo"
-                        Command="{Binding ExportarHistoricoCommand}"
-                        Background="#107C41" Foreground="White"
-                        FontWeight="SemiBold" CornerRadius="4"/>
-                
-                <Button Content="Resetar Dados"
-                        Command="{Binding ResetarHistoricoCommand}"
-                        Background="#D9534F" Foreground="White"
-                        FontWeight="SemiBold" CornerRadius="4"/>
+                <Button Content="5 Minutos" Command="{Binding MudarPeriodoCommand}" CommandParameter="5M" Background="#5BC0DE" Foreground="White" CornerRadius="4"/>
+                <Button Content="30 Minutos" Command="{Binding MudarPeriodoCommand}" CommandParameter="30M" Background="#5BC0DE" Foreground="White" CornerRadius="4"/>
+                <Button Content="1 Hora" Command="{Binding MudarPeriodoCommand}" CommandParameter="1H" Background="#5BC0DE" Foreground="White" CornerRadius="4"/>
             </StackPanel>
 
-            <Border Background="#FAFAFA" CornerRadius="10" Padding="15" Margin="0,15,0,0">
-                <StackPanel>
-                    <TextBlock Text="🌡️ Temperatura (°C)"
-                               FontSize="18"
-                               FontWeight="SemiBold"
-                               Foreground="#000000"
-                               Margin="0,0,0,8"/>
-                    <lvc:CartesianChart Series="{Binding TemperaturaSeries}"
-                                        XAxes="{Binding EixoX}"
-                                        YAxes="{Binding EixoY}"
-                                        Height="250"/>
-                    <StackPanel Orientation="Horizontal" Spacing="25" Margin="0,10,0,0" HorizontalAlignment="Center">
-                        <Border Background="#FFE0B2" CornerRadius="6" Padding="6,3">
-                            <TextBlock Text="{Binding MediaTemperaturaTexto}" FontSize="14" Foreground="#000000"/>
-                        </Border>
-                        <Border Background="#FFE0B2" CornerRadius="6" Padding="6,3">
-                            <TextBlock Text="{Binding DesvioTemperaturaTexto}" FontSize="14" Foreground="#000000"/>
-                        </Border>
-                    </StackPanel>
+            <!-- BLOCOS DE EXPORTAÇÃO E RESET (LADO A LADO) -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50" Margin="0,10,0,10">
+                
+                <!-- Bloco 1: Temperatura e Umidade -->
+                <StackPanel Spacing="8" Width="230">
+                    <TextBlock Text="Dados dos Sensores" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#333"/>
+                    
+                    <Button Content="Exportar Histórico Completo"
+                            Command="{Binding ExportarHistoricoCommand}"
+                            Background="#107C41" Foreground="White"
+                            FontWeight="SemiBold" CornerRadius="4"
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    
+                    <Button Content="Resetar Dados"
+                            Command="{Binding ResetarHistoricoCommand}"
+                            Background="#D9534F" Foreground="White"
+                            FontWeight="SemiBold" CornerRadius="4"
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                 </StackPanel>
-            </Border>
 
-            <Border Background="#FAFAFA" CornerRadius="10" Padding="15">
-                <StackPanel>
-                    <TextBlock Text="💧 Umidade (%)"
-                               FontSize="18"
-                               FontWeight="SemiBold"
-                               Foreground="#000000"
-                               Margin="0,0,0,8"/>
-                    <lvc:CartesianChart Series="{Binding UmidadeSeries}"
-                                        XAxes="{Binding EixoX}"
-                                        YAxes="{Binding EixoY}"
-                                        Height="250"/>
-                    <StackPanel Orientation="Horizontal" Spacing="25" Margin="0,10,0,0" HorizontalAlignment="Center">
-                        <Border Background="#BBDEFB" CornerRadius="6" Padding="6,3">
-                            <TextBlock Text="{Binding MediaUmidadeTexto}" FontSize="14" Foreground="#000000"/>
-                        </Border>
-                        <Border Background="#BBDEFB" CornerRadius="6" Padding="6,3">
-                            <TextBlock Text="{Binding DesvioUmidadeTexto}" FontSize="14" Foreground="#000000"/>
-                        </Border>
-                    </StackPanel>
+                <!-- Bloco 2: Erros do ESP32 -->
+                <StackPanel Spacing="8" Width="230">
+                    <TextBlock Text="Logs de Erros (SD)" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#333"/>
+                    
+                    <Button Content="Exportar Erros (Excel)"
+                            Command="{Binding ExportarErrosExcelCommand}"
+                            Background="#107C41" Foreground="White"
+                            FontWeight="SemiBold" CornerRadius="4"
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    
+                    <Button Content="Resetar Erros"
+                            Command="{Binding ResetarErrosCommand}"
+                            Background="#D9534F" Foreground="White"
+                            FontWeight="SemiBold" CornerRadius="4"
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                 </StackPanel>
-            </Border>
+
+            </StackPanel>
+
+            <!-- Gráfico de Temperatura -->
+            <StackPanel Margin="0,10,0,0">
+                <TextBlock Text="🌡️ Temperatura (°C)" FontSize="18" FontWeight="SemiBold" Foreground="#000000" Margin="0,0,0,8"/>
+                <Border Background="Black" CornerRadius="4" Padding="15">
+                    <lvc:CartesianChart Series="{Binding TemperaturaSeries}" XAxes="{Binding EixoX}" YAxes="{Binding EixoY}" Height="220"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Spacing="25" Margin="0,10,0,0" HorizontalAlignment="Center">
+                    <Border Background="#FFE0B2" CornerRadius="6" Padding="6,3">
+                        <TextBlock Text="{Binding MediaTemperaturaTexto}" FontSize="14" Foreground="#000000"/>
+                    </Border>
+                    <Border Background="#FFE0B2" CornerRadius="6" Padding="6,3">
+                        <TextBlock Text="{Binding DesvioTemperaturaTexto}" FontSize="14" Foreground="#000000"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Gráfico de Umidade -->
+            <StackPanel Margin="0,10,0,0">
+                <TextBlock Text="💧 Umidade (%)" FontSize="18" FontWeight="SemiBold" Foreground="#000000" Margin="0,0,0,8"/>
+                <Border Background="Black" CornerRadius="4" Padding="15">
+                    <lvc:CartesianChart Series="{Binding UmidadeSeries}" XAxes="{Binding EixoX}" YAxes="{Binding EixoY}" Height="220"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Spacing="25" Margin="0,10,0,0" HorizontalAlignment="Center">
+                    <Border Background="#BBDEFB" CornerRadius="6" Padding="6,3">
+                        <TextBlock Text="{Binding MediaUmidadeTexto}" FontSize="14" Foreground="#000000"/>
+                    </Border>
+                    <Border Background="#BBDEFB" CornerRadius="6" Padding="6,3">
+                        <TextBlock Text="{Binding DesvioUmidadeTexto}" FontSize="14" Foreground="#000000"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Área de Visualização de Erros -->
+            <StackPanel Margin="0,20,0,0">
+                <StackPanel Orientation="Horizontal" Spacing="15" Margin="0,0,0,8" VerticalAlignment="Center">
+                    <TextBlock Text="⚠️ Visualizador de Erros (Cartão SD)" 
+                               FontSize="18" 
+                               FontWeight="SemiBold" 
+                               Foreground="#000000"
+                               VerticalAlignment="Center"/>
+                    
+                    <!-- Botão para puxar o texto e mostrar na tela -->
+                    <Button Content="🔄 Puxar Logs do ESP32"
+                            Command="{Binding BaixarLogSdCommand}"
+                            Background="#F0AD4E" Foreground="White"
+                            FontWeight="Bold" CornerRadius="4"
+                            Padding="10,5"/>
+                </StackPanel>
+                
+                <Border Background="Black" CornerRadius="4" Padding="15">
+                    <TextBox Text="{Binding TextoLogSd}"
+                             IsReadOnly="True"
+                             AcceptsReturn="True"
+                             Height="200"
+                             FontFamily="Consolas"
+                             FontSize="12"
+                             Background="White"
+                             Foreground="Black"/>
+                </Border>
+            </StackPanel>
 
         </StackPanel>
     </ScrollViewer>

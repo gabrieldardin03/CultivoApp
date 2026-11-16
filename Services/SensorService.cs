@@ -10,7 +10,7 @@ namespace EstufaInteligente.Services
     {
         private readonly HttpClient _http = new();
         private readonly Timer _timer;
-        private const string EspUrl = "http://192.168.1.200/getData";
+        private const string EspUrl = "http://192.168.1.10/getData";
 
         public float Temperatura { get; private set; }
         public float Umidade { get; private set; }

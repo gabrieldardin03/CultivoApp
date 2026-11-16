@@ -160,6 +160,22 @@
           }
         }
       },
+      "Avalonia.Headless/11.3.3": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "11.3.3"
+        },
+        "compile": {
+          "lib/net8.0/Avalonia.Headless.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Avalonia.Headless.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Avalonia.Native/11.3.3": {
         "type": "package",
         "dependencies": {
@@ -2549,6 +2565,24 @@
         "lib/netstandard2.0/Avalonia.FreeDesktop.xml"
       ]
     },
+    "Avalonia.Headless/11.3.3": {
+      "sha512": "GceLh5/w6XS7I/hKQjbbSHlhTGkV0yrgvBcjXuaFXQOKF+BGtS1HvryMK1R9FFEQZvqM5FYABnNgUW/Gexmglw==",
+      "type": "package",
+      "path": "avalonia.headless/11.3.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "avalonia.headless.11.3.3.nupkg.sha512",
+        "avalonia.headless.nuspec",
+        "lib/net6.0/Avalonia.Headless.dll",
+        "lib/net6.0/Avalonia.Headless.xml",
+        "lib/net8.0/Avalonia.Headless.dll",
+        "lib/net8.0/Avalonia.Headless.xml",
+        "lib/netstandard2.0/Avalonia.Headless.dll",
+        "lib/netstandard2.0/Avalonia.Headless.xml"
+      ]
+    },
     "Avalonia.Native/11.3.3": {
       "sha512": "hMorDU3okC5dbmSyByj48nfIYRLW2mC0sWyFE9NI7I/0hG72IeHmhBETHB9SynjS+JQSDJ2pk3f22g6qsaTaIg==",
       "type": "package",
@@ -4606,6 +4640,7 @@
       "Avalonia >= 11.3.3",
       "Avalonia.Desktop >= 11.3.3",
       "Avalonia.Fonts.Inter >= 11.3.3",
+      "Avalonia.Headless >= 11.3.3",
       "Avalonia.Themes.Fluent >= 11.3.3",
       "CommunityToolkit.Mvvm >= 8.2.1",
       "EPPlus >= 7.0.0",
@@ -4623,11 +4658,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
+      "projectUniqueName": "C:\\Users\\gabriel dardin\\Downloads\\estufaprojeto\\estufaTCC\\CultivoApp.csproj",
       "projectName": "CultivoApp",
-      "projectPath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\CultivoApp.csproj",
+      "projectPath": "C:\\Users\\gabriel dardin\\Downloads\\estufaprojeto\\estufaTCC\\CultivoApp.csproj",
       "packagesPath": "C:\\Users\\gabriel dardin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gabriel dardin\\Downloads\\aplicativo_dos_cogumelos-main (1)\\APLICATIVO-DOS-COGUMELOS\\obj\\",
+      "outputPath": "C:\\Users\\gabriel dardin\\Downloads\\estufaprojeto\\estufaTCC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gabriel dardin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4645,6 +4680,9 @@
         }
       },
       "warningProperties": {
+        "noWarn": [
+          "NU1701"
+        ],
         "warnAsError": [
           "NU1605"
         ]
@@ -4669,6 +4707,10 @@
             "version": "[11.3.3, )"
           },
           "Avalonia.Fonts.Inter": {
+            "target": "Package",
+            "version": "[11.3.3, )"
+          },
+          "Avalonia.Headless": {
             "target": "Package",
             "version": "[11.3.3, )"
           },
@@ -4728,47 +4770,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'OpenTK 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
-      "libraryId": "OpenTK",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'OpenTK.GLControl 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
-      "libraryId": "OpenTK.GLControl",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'SkiaSharp.Views 2.88.6' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
-      "libraryId": "SkiaSharp.Views",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'SkiaSharp.Views.Gtk2 2.88.6' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
-      "libraryId": "SkiaSharp.Views.Gtk2",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  }
 }

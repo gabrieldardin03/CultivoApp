@@ -1,4 +1,3 @@
-// DadosHistoricosService.cs
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -22,19 +21,23 @@ namespace CultivoApp.Services
             Carregar();
         }
 
-        public void Adicionar(double temperatura, double umidade)
+        // Agora recebe os estados dos atuadores e do sistema
+        public void Adicionar(double temperatura, double umidade, bool modoAuto, bool aquecedor, bool umidificador, bool exaustor)
         {
             var registro = new DadoSensor
             {
                 Data = DateTime.Now,
                 Temperatura = temperatura,
-                Umidade = umidade
+                Umidade = umidade,
+                ModoAutomatico = modoAuto,
+                AquecedorLigado = aquecedor,
+                UmidificadorLigado = umidificador,
+                ExaustorLigado = exaustor
             };
             Registros.Add(registro);
             Salvar();
         }
 
-        // ✅ NOVO: Função para limpar os dados
         public void Resetar()
         {
             Registros.Clear();
@@ -63,10 +66,15 @@ namespace CultivoApp.Services
         }
     }
 
+    // Novas propriedades adicionadas ao modelo para salvar a "fotografia" do momento
     public class DadoSensor
     {
         public DateTime Data { get; set; }
         public double Temperatura { get; set; }
         public double Umidade { get; set; }
+        public bool ModoAutomatico { get; set; }
+        public bool AquecedorLigado { get; set; }
+        public bool UmidificadorLigado { get; set; }
+        public bool ExaustorLigado { get; set; }
     }
 }

@@ -11,6 +11,7 @@
           "Avalonia": "11.3.3",
           "Avalonia.Desktop": "11.3.3",
           "Avalonia.Fonts.Inter": "11.3.3",
+          "Avalonia.Headless": "11.3.3",
           "Avalonia.Themes.Fluent": "11.3.3",
           "CommunityToolkit.Mvvm": "8.2.1",
           "EPPlus": "7.0.0",
@@ -131,6 +132,17 @@
         },
         "runtime": {
           "lib/net8.0/Avalonia.FreeDesktop.dll": {
+            "assemblyVersion": "11.3.3.0",
+            "fileVersion": "11.3.3.0"
+          }
+        }
+      },
+      "Avalonia.Headless/11.3.3": {
+        "dependencies": {
+          "Avalonia": "11.3.3"
+        },
+        "runtime": {
+          "lib/net8.0/Avalonia.Headless.dll": {
             "assemblyVersion": "11.3.3.0",
             "fileVersion": "11.3.3.0"
           }
@@ -1004,6 +1016,13 @@
       "sha512": "sha512-v9qj1EqXanhgOocun7Ii5KiX2z1zdIm2zctad+2ViAF4GWBQeeSwNRQiBdhiyeSWVFBBCZRWx2uK0IUPeZiYyA==",
       "path": "avalonia.freedesktop/11.3.3",
       "hashPath": "avalonia.freedesktop.11.3.3.nupkg.sha512"
+    },
+    "Avalonia.Headless/11.3.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GceLh5/w6XS7I/hKQjbbSHlhTGkV0yrgvBcjXuaFXQOKF+BGtS1HvryMK1R9FFEQZvqM5FYABnNgUW/Gexmglw==",
+      "path": "avalonia.headless/11.3.3",
+      "hashPath": "avalonia.headless.11.3.3.nupkg.sha512"
     },
     "Avalonia.Native/11.3.3": {
       "type": "package",

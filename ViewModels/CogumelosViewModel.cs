@@ -38,6 +38,7 @@ namespace CultivoApp.ViewModels
         partial void OnSelectedMushroomChanged(Mushroom? value)
         {
             LoadSelectedImage();
+            // Removido o disparo automático daqui para evitar envio de dados incompletos ao apenas clicar na lista.
         }
 
         private void LoadSelectedImage()
@@ -79,6 +80,10 @@ namespace CultivoApp.ViewModels
                 Name = "Novo Cogumelo",
                 Temperature = "20–25 °C",
                 Humidity = "80–90%",
+                TempMin = 20.0, // Já inicia com valores padrão seguros
+                TempMax = 25.0,
+                UmidMin = 80.0,
+                UmidMax = 90.0,
                 ImagePath = "avares://CultivoApp/Assets/default.png"
             };
 
@@ -95,11 +100,26 @@ namespace CultivoApp.ViewModels
             IsEditing = true;
         }
 
+        // 🔹 ATUALIZADO: Salva localmente E envia os dados reais para a placa ESP32 ao salvar
         [RelayCommand]
-        private void SaveChanges()
+        private async Task SaveChangesAsync()
         {
-            AppDataService.Instance.SaveData(SelectedMushroom);
-            AppDataService.Instance.SaveAll(); // 🔹 Garante persistência
+            if (SelectedMushroom != null)
+            {
+                // Salva no banco de dados local do aplicativo
+                AppDataService.Instance.SaveData(SelectedMushroom);
+                AppDataService.Instance.SaveAll();
+
+                // Dispara os valores numéricos reais para o IP da placa
+                await ApiService.UpdateConfigAsync(
+                    SelectedMushroom.Name,
+                    SelectedMushroom.TempMin,
+                    SelectedMushroom.TempMax,
+                    SelectedMushroom.UmidMin,
+                    SelectedMushroom.UmidMax
+                );
+            }
+
             IsEditing = false;
         }
 
@@ -113,7 +133,7 @@ namespace CultivoApp.ViewModels
             if (SelectedMushroom == mushroom)
                 SelectedMushroom = null;
 
-            AppDataService.Instance.SaveAll(); // 🔹 Atualiza JSON após exclusão
+            AppDataService.Instance.SaveAll();
         }
 
         [RelayCommand]
@@ -133,43 +153,36 @@ namespace CultivoApp.ViewModels
                 AllowMultiple = false,
                 FileTypeFilter = new[]
                 {
-            new FilePickerFileType("Imagens")
-            {
-                Patterns = new[] { "*.png", "*.jpg", "*.jpeg" }
-            }
-        }
+                    new FilePickerFileType("Imagens")
+                    {
+                        Patterns = new[] { "*.png", "*.jpg", "*.jpeg" }
+                    }
+                }
             });
 
             if (files.Count > 0)
             {
                 var file = files[0];
 
-                // 🔹 Caminho raiz do projeto (sobe 3 níveis a partir de /bin/Debug/net8.0/)
                 var projectRoot = Path.GetFullPath(
                     Path.Combine(AppContext.BaseDirectory, "..", "..", "..")
                 );
 
-                // 🔹 Caminho da pasta Assets/Images dentro do projeto
                 var assetsDir = Path.Combine(projectRoot, "Assets", "Images");
 
-                // 🔹 Garante que a pasta exista
                 if (!Directory.Exists(assetsDir))
                     Directory.CreateDirectory(assetsDir);
 
-                // 🔹 Caminho completo do destino
                 var destPath = Path.Combine(assetsDir, file.Name);
 
-                // 🔹 Copia o arquivo
                 await using (var sourceStream = await file.OpenReadAsync())
                 await using (var destStream = File.Create(destPath))
                 {
                     await sourceStream.CopyToAsync(destStream);
                 }
 
-                // 🔹 Caminho relativo usado no app
                 SelectedMushroom.ImagePath = $"Assets/Images/{file.Name}";
 
-                // 🔹 Salva no JSON
                 AppDataService.Instance.SaveData(SelectedMushroom);
                 AppDataService.Instance.SaveAll();
 
